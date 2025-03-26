@@ -1,9 +1,10 @@
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { APP_ROUTES } from './utils/constants';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
-import SearchPage from './pages/SearchPage';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Cart from './pages/Cart';
 import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import { APP_ROUTES } from './utils/constants';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     <Route path={APP_ROUTES.SIGN_IN} exact element={<SignIn />} />
     <Route path={APP_ROUTES.SEARCH_PAGE} exact element={<SearchPage />} />
     <Route path={APP_ROUTES.HOME_PAGE} exact element={<HomePage />} />
+    <Route path={APP_ROUTES.CART_PAGE} exact element={<Cart />} />
     </Routes>
     </BrowserRouter>
   )
