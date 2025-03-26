@@ -3,7 +3,7 @@ import { APP_ROUTES } from './utils/constants';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import SearchPage from './pages/SearchPage';
-
+import HomePage from './pages/HomePage';
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
     <Route path={APP_ROUTES.SIGN_UP} exact element={<SignUp />} />
     <Route path={APP_ROUTES.SIGN_IN} exact element={<SignIn />} />
     <Route path={APP_ROUTES.SEARCH_PAGE} exact element={<SearchPage />} />
+    <Route path={APP_ROUTES.HOME_PAGE} exact element={<HomePage />} />
     </Routes>
     </BrowserRouter>
   )
