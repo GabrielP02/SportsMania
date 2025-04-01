@@ -3,5 +3,6 @@ export const APP_ROUTES = {
   SIGN_IN: '/signin',
   SEARCH_PAGE: '/searchpage',
   HOME_PAGE: '/homepage',
-  CART_PAGE: '/cart'
+  CART_PAGE: '/cart',
+  ADRESS: '/adress'
 };
