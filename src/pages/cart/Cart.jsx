@@ -1,12 +1,13 @@
-import React from "react";
+import React from "react"; 
 import "./cart.css";
 import { APP_ROUTES } from  "../../utils/constants"
 import Navbar from "../../components/NavBar";
+import bola_penalty from "../../assets/bola_penalty.png";
+import joelheira from "../../assets/joelheira.jpeg";
 
 const Cart = () => {
   return (
     <div className="cart-container">
-
       <div className="cart-steps">
         <span className="active">1 Carrinho</span>
         <span>2 Identificação</span>
@@ -25,13 +26,19 @@ const Cart = () => {
           </thead>
           <tbody>
             <tr>
-              <td>Bola penalty (Branca)</td>
+              <td>
+                <img src={bola_penalty} alt="Bola penalty (Branca)" className="cart-img" />
+                Bola penalty (Branca)
+              </td>
               <td>1</td>
               <td>R$ 59,90</td>
               <td>R$ 59,90</td>
             </tr>
             <tr>
-              <td>Joelheira (Preta)</td>
+              <td>
+                <img src={joelheira} alt="Joelheira (Preta)" className="cart-img" />
+                Joelheira (Preta)
+              </td>
               <td>1</td>
               <td>R$ 59,90</td>
               <td>R$ 59,90</td>
@@ -61,11 +68,7 @@ const Cart = () => {
 
       <button className="continue-btn">Continuar</button>
 
-      <footer className="cart-footer">
-        <p>@SM_SportsMania</p>
-        <p>(81) 9 9182-0455</p>
-        <p>Rua Padre Afonso, 81 - Casa Amarela, Recife-PE</p>
-      </footer>
+    
     </div>
   );
 };
