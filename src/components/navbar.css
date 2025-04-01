@@ -1,0 +1,78 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.container {
+    display: flex;
+    width: 100%; /* Garante que a navbar ocupe toda a largura da tela */
+    justify-content: center;
+    align-items: center;
+    background-color: black; /* Define o fundo da navbar */
+    padding: 0; /* Remove espaços extras */
+}
+
+.list {
+
+    display: flex;
+    width: 100%; /* Garante que a navbar ocupe toda a largura */
+    height: 50px; /* Reduz a altura da navbar */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.manaMail {
+    color: rgb(255, 0, 0);
+}
+
+.manaAblitr {
+    color: rgb(244, 244, 244);
+}
+
+.Merak {
+    display: flex;
+    flex-direction: row;
+    font-size: 24px; /* Reduzi um pouco o tamanho */
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigast {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navigast > li {
+    padding: 10px 15px;
+    font-size: 16px;
+    position: relative;
+}
+
+/* Estilo normal dos links */
+.navigast > li > a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Quando clicado, a cor do texto fica amarela e o sublinhado aparece */
+.navigast > li.active > a {
+    color: yellow;
+}
+
+.navigast > li.active::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: yellow;
+}

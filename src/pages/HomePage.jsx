@@ -9,8 +9,7 @@ import banner from "../assets/banner.jpg";
 import bola_penalty from "../assets/bola_penalty.png";
 import luva from "../assets/luva.png";
 import joelheira from "../assets/joelheira.jpeg";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/NavBar";
+
 
 const products = [
   { name: "Bola jordan colorida", price: "R$540,49", img: bola },
@@ -44,8 +43,7 @@ const ProductCard = ({ name, price, img }) => {
 const HomePage = () => {
   return (
     <div className="w-screen h-screen p-4">
-      <Sidebar/>
-      <Navbar/>
+    
       
       <Swiper pagination={{ clickable: true }} modules={[Pagination]} className="my-6">
         <SwiperSlide>
