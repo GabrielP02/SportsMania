@@ -1,25 +1,18 @@
-import { default as React, default as React } from "react";
+import React from "react";
 import "./cart.css";
+import { APP_ROUTES } from  "../../utils/constants"
+import Navbar from "../../components/NavBar";
 
 const Cart = () => {
   return (
     <div className="cart-container">
-      <header className="cart-header">
-        <input type="text" placeholder="Pesquisar..." className="search-bar" />
-        <nav>
-          <a href="#">Home</a>
-          <a href="#">Sobre</a>
-          <a href="#">Contato</a>
-        </nav>
-        <button className="login-btn">Login</button>
-      </header>
-      
+
       <div className="cart-steps">
         <span className="active">1 Carrinho</span>
         <span>2 Identificação</span>
         <span>3 Pagamento</span>
       </div>
-      
+
       <div className="cart-content">
         <table className="cart-table">
           <thead>
@@ -46,7 +39,7 @@ const Cart = () => {
           </tbody>
         </table>
       </div>
-      
+
       <div className="cart-summary">
         <div className="shipping">
           <label>Prazo de entrega:</label>
@@ -65,9 +58,9 @@ const Cart = () => {
           <p>Total da compra: <span>R$ 119,80</span></p>
         </div>
       </div>
-      
+
       <button className="continue-btn">Continuar</button>
-      
+
       <footer className="cart-footer">
         <p>@SM_SportsMania</p>
         <p>(81) 9 9182-0455</p>
