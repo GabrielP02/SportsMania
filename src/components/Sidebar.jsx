@@ -8,9 +8,10 @@ const Sidebar = () => {
   return (
     <>
       {/* Botão de menu hambúrguer */}
-      <button className="p-2 text-yellow-200 hover:text-yellow-100" onClick={() => setIsOpen(true)}>
-      <Menu size={30} />
+      <button className="p-2 text-black" onClick={() => setIsOpen(true)}>
+        <Menu size={30} />
       </button>
+
 
       {/* Sidebar */}
       <div

@@ -8,4 +8,5 @@ export const APP_ROUTES = {
   PRODUCT: '/product',
   ABOUT_US: '/about_us',
   PERFIL: '/perfil',
+  MY_ORDERS: '/pedidos',  
 };
