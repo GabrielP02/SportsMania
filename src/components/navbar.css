@@ -2,27 +2,32 @@ html, body {
     padding: 0;
     margin: 0;
     font-family: "Roboto", sans-serif;
+    width: 100%; /* Garante que o body ocupe toda a largura */
+    overflow-x: hidden; /* Previne barras de rolagem horizontais */
 }
 
 .container {
     display: flex;
-    width: 100%; /* Garante que a navbar ocupe toda a largura da tela */
-    justify-content: center;
+    width: 100vw; /* Usa viewport width em vez de 100% */
+    justify-content: space-between; /* Alterado de center para space-between */
     align-items: center;
-    background-color: black; /* Define o fundo da navbar */
-    padding: 0; /* Remove espaços extras */
+    background-color: black;
+    padding: 0;
+    margin: 0; /* Adicionado para garantir */
+    box-sizing: border-box; /* Importante para cálculos de largura */
 }
 
 .list {
-
     display: flex;
-    width: 100%; /* Garante que a navbar ocupe toda a largura */
-    height: 50px; /* Reduz a altura da navbar */
+    width: 100%;
+    height: 50px;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0;
+    margin: 0;
 }
 
+/* Mantenha o restante do seu CSS como está */
 .manaMail {
     color: rgb(255, 0, 0);
 }
@@ -34,7 +39,7 @@ html, body {
 .Merak {
     display: flex;
     flex-direction: row;
-    font-size: 24px; /* Reduzi um pouco o tamanho */
+    font-size: 24px;
     padding: 10px;
     justify-content: center;
     align-items: center;
@@ -55,14 +60,12 @@ html, body {
     position: relative;
 }
 
-/* Estilo normal dos links */
 .navigast > li > a {
     text-decoration: none;
     color: white;
     transition: color 0.3s ease-in-out;
 }
 
-/* Quando clicado, a cor do texto fica amarela e o sublinhado aparece */
 .navigast > li.active > a {
     color: yellow;
 }

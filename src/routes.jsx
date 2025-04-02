@@ -7,6 +7,9 @@ import SearchPage from './pages/SearchPage';
 import HomePage from './pages/HomePage';
 import Cart from './pages/cart/Cart';
 import { APP_ROUTES } from './utils/constants';
+import Product from './pages/Product';
+import About_us from './pages/SobreNos'
+import Perfil from "./pages/Perfil";
 
 const AppRoutes = () => {
   return (
@@ -18,6 +21,9 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.ADRESS} element={<Adress />} />
       <Route path={APP_ROUTES.HOME_PAGE} element={<HomePage />} />
       <Route path={APP_ROUTES.CART_PAGE} element={<Cart />} />
+      <Route path={APP_ROUTES.PRODUCT} element={<Product/>} />
+      <Route path={APP_ROUTES.ABOUT_US} element={<About_us/>} />
+      <Route path={APP_ROUTES.PERFIL} element={<Perfil/>} />
     </Routes>
   );
 };

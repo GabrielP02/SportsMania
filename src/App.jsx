@@ -8,7 +8,7 @@ import Sidebar from './components/Sidebar';
 const App = () => {
   return (
     <Router>
-      <NavBar />
+
       <AppRoutes />
       <Footer />
     </Router>

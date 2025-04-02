@@ -4,5 +4,8 @@ export const APP_ROUTES = {
   SEARCH_PAGE: '/searchpage',
   HOME_PAGE: '/homepage',
   CART_PAGE: '/cart',
-  ADRESS: '/adress'
+  ADRESS: '/adress',
+  PRODUCT: '/product',
+  ABOUT_US: '/about_us',
+  PERFIL: '/perfil',
 };
