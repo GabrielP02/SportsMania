@@ -9,6 +9,7 @@ import banner from "../assets/banner.jpg";
 import bola_penalty from "../assets/bola_penalty.png";
 import luva from "../assets/luva.png";
 import joelheira from "../assets/joelheira.jpeg";
+import Navbar from "../components/NavBar";
 
 
 const products = [
@@ -31,7 +32,7 @@ const ProductCard = ({ name, price, img }) => {
   return (
     <div 
       className="border p-4 rounded-lg text-center shadow-md cursor-pointer hover:shadow-lg transition"
-      onClick={() => navigate(`/produto/${name}`)}
+      onClick={() => navigate(`/product`)}
     >
       <img src={img} alt={name} className="w-24 mx-auto mb-2" />
       <h3 className="font-medium">{name}</h3>
@@ -42,7 +43,10 @@ const ProductCard = ({ name, price, img }) => {
 
 const HomePage = () => {
   return (
-    <div className="w-screen h-screen p-4">
+    <div className="min-h-screen">
+    <Navbar/>
+    <div className="w-full p-4 mx-auto">
+      
     
       
       <Swiper pagination={{ clickable: true }} modules={[Pagination]} className="my-6">
@@ -64,6 +68,7 @@ const HomePage = () => {
           <ProductCard key={product.name} {...product} />
         ))}
       </div>
+    </div>
     </div>
   );
 };
