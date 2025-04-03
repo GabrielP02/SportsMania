@@ -6,7 +6,8 @@ export const APP_ROUTES = {
   CART_PAGE: '/cart',
   ADRESS: '/adress',
   PRODUCT: '/product',
-  ABOUT_US: '/about_us',
+  ABOUT_US: '/aboutus',
   PERFIL: '/perfil',
-  MY_ORDERS: '/pedidos',  
+  MY_ORDERS: '/pedidos',
+  CONTACT: '/contact'  
 };
