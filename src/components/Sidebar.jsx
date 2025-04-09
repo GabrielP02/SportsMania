@@ -48,7 +48,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/enderecos" className="flex justify-between text-gray-600 hover:text-black">
+              <Link to="/Adress" className="flex justify-between text-gray-600 hover:text-black">
                 Meus endereços <span className="text-yellow-500">{">"}</span>
               </Link>
             </li>
