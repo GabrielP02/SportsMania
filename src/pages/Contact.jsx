@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import './Contact.css';
+import '../Styles/Contact.css'; 
 import { APP_ROUTES } from "../utils/constants";
-
+import Navbar from "../components/NavBar";
 
 const Contact = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +16,7 @@ const Contact = () => {
   };
 
   return (
+    <><Navbar />
     <div className="container">
       <h2>Contato</h2>
       <form onSubmit={handleSubmit}>
@@ -26,8 +27,7 @@ const Contact = () => {
             id="nome"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            required
-          />
+            required />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -36,8 +36,7 @@ const Contact = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+            required />
         </div>
         <div className="form-group">
           <label htmlFor="telefone">Telefone:</label>
@@ -46,8 +45,7 @@ const Contact = () => {
             id="telefone"
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
-            required
-          />
+            required />
         </div>
         <div className="form-group">
           <label htmlFor="mensagem">Mensagem:</label>
@@ -55,12 +53,11 @@ const Contact = () => {
             id="mensagem"
             value={mensagem}
             onChange={(e) => setMensagem(e.target.value)}
-            required
-          />
+            required />
         </div>
         <button type="submit">Enviar</button>
       </form>
-    </div>
+    </div></>
   );
 };
 
