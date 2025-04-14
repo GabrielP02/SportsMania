@@ -19,7 +19,7 @@ const Navbar = () => {
                         navigate("/homepage");
                     }}
                 >
-                    <span className="red">Sportes</span>
+                    <span className="red">Sports</span>
                     <span className="blue">Mania</span>
                 </span>
             </div>
