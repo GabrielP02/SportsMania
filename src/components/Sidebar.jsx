@@ -34,7 +34,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/favoritos" className="flex justify-between text-gray-600 hover:text-black">
+              <Link to="/pedidos" className="flex justify-between text-gray-600 hover:text-black">
                 Favoritos <span className="text-yellow-500">{">"}</span>
               </Link>
             </li>
@@ -43,12 +43,12 @@ const Sidebar = () => {
           <h2 className="font-bold text-lg mt-6 mb-4">Meu Cadastro</h2>
           <ul className="space-y-3">
             <li>
-              <Link to="/cadastro" className="flex justify-between text-gray-600 hover:text-black">
+              <Link to="/Perfil" className="flex justify-between text-gray-600 hover:text-black">
                 Alterar dados cadastrais <span className="text-yellow-500">{">"}</span>
               </Link>
             </li>
             <li>
-              <Link to="/cartoes" className="flex justify-between text-gray-600 hover:text-black">
+              <Link to="/Perfil" className="flex justify-between text-gray-600 hover:text-black">
                 Meus cartões <span className="text-yellow-500">{">"}</span>
               </Link>
             </li>
