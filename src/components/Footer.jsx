@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="flex justify-center gap-6">
         {/* Facebook */}
         <a
-          href="https://www.facebook.com"
+          href="https://web.facebook.com/smsportsmania"
           target="_blank"
           rel="noopener noreferrer"
           className="text-2xl hover:text-yellow-500"
@@ -17,7 +17,7 @@ const Footer = () => {
 
         {/* Instagram */}
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/sm_sportsmania/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-2xl hover:text-yellow-500"
@@ -27,7 +27,7 @@ const Footer = () => {
 
         {/* WhatsApp */}
         <a
-          href="https://wa.me/yourphonenumber"
+          href="https://wa.me/5581991820455"
           target="_blank"
           rel="noopener noreferrer"
           className="text-2xl hover:text-yellow-500"
@@ -37,7 +37,7 @@ const Footer = () => {
       </div>
 
       <div className="text-center mt-4">
-        <p>Endereço: Rua Padre Afonso, 81 - Casa Amarela, Recife-PE</p>
+        <p>Endereço: Rua Pedro Allain, 81 - Loja: 5 - Casa Amarela, Recife - PE, 52070-210</p>
         <p>&copy; 2025 SM_SportsMania. Todos os direitos reservados.</p>
       </div>
     </footer>
