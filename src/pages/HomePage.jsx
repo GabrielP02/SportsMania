@@ -45,7 +45,7 @@ const HomePage = () => {
           setProducts(
             data.map((product) => ({
               ...product,
-              imagemUrl: "https://cambuci.vtexassets.com/arquivos/ids/1505517-800-auto?v=638774861932270000&width=800&height=auto&aspect=true", // Imagem padrão
+              imagemUrl: "https://via.placeholder.com/150", // Imagem padrão
             }))
           );
         } else {
