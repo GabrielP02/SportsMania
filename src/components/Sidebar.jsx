@@ -48,9 +48,10 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/Perfil" className="flex justify-between text-gray-600 hover:text-black">
+            <Link to="/cards" className="flex justify-between text-gray-600 hover:text-black">
                 Meus cartões <span className="text-yellow-500">{">"}</span>
               </Link>
+
             </li>
           </ul>
 
@@ -63,7 +64,7 @@ const Sidebar = () => {
             </li>
           </ul>
 
-
+            
         </div>
       </div>
     </>
