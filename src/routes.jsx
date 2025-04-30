@@ -10,8 +10,8 @@ import { APP_ROUTES } from "./utils/constants";
 import Product from "./pages/Product";
 import AboutUs from "./pages/AboutUs";
 import Perfil from "./pages/Perfil";
-import MyOrders from "./pages/MyOrders";
-import Contact from "./pages/Contact";
+import MyOrders from './pages/MyOrders';
+import Contact from './pages/Contact';  
 
 const AppRoutes = () => {
   return (
@@ -27,7 +27,7 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.ABOUT_US} element={<AboutUs />} />
       <Route path={APP_ROUTES.PERFIL} element={<Perfil />} />
       <Route path={APP_ROUTES.MY_ORDERS} element={<MyOrders />} />
-      <Route path={APP_ROUTES.CONTACT} element={<Contact />} />
+      <Route path={APP_ROUTES.CONTACT} element={<Contact />} />  
     </Routes>
   );
 };

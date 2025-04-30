@@ -9,5 +9,7 @@ export const APP_ROUTES = {
   ABOUT_US: '/aboutus',
   PERFIL: '/perfil',
   MY_ORDERS: '/pedidos',
-  CONTACT: '/contact'  
+  CONTACT: '/contact',
+  CARDS: '/cards'
+
 };
