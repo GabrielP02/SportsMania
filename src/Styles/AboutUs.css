@@ -8,32 +8,54 @@
 }
 
 .titulo {
-    text-align: left; /* Alinha o título à esquerda */
-    font-size: 2.5em; /* Tamanho da fonte do título */
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    text-align: left; 
+    font-size: 2.5em; 
+    margin-bottom: 20px; 
 }
 
 .blocos-container {
-    display: flex; /* Usando flexbox para alinhar os blocos lado a lado */
-    justify-content: space-between; /* Espaço entre os blocos */
-    width: 70%; /* Definindo a largura total dos blocos como 70% */
+    display: flex; 
+    justify-content: space-between; 
+    width: 90%; 
 }
 
-.bloco {
-    flex: 1; /* Cada bloco ocupa a mesma largura */
-    margin: 0 30px; /* Aumentando a margem lateral entre os blocos */
-    padding: 20px; /* Espaçamento interno dos blocos */
-    border-radius: 8px; /* Bordas arredondadas */
+.bloco1 {
+    flex: 1; 
+    margin-right: 10%;
+    padding: 20px; 
+    border-radius: 8px; 
+    text-align: justify;
+}
+.bloco2 {
+    margin-left: 10%;
+    flex: 1; 
+    padding: 20px; 
+    border-radius: 8px; 
+    text-align: justify;
 
 }
 
-.bloco h2 {
-    margin-top: 0; /* Remove a margem superior do título do bloco */
+.bloco1 h2 {
+    margin-top: 0; 
 }
 
-.bloco p {
-    font-size: 1.2em; /* Aumentando o tamanho da fonte do texto dos blocos */
+.bloco1 p {
+    font-size: 1.2em; 
 }
+.bloco1 b {
+    font-size: 1.3em; 
+}
+.bloco2 h2 {
+    margin-top: 0; 
+}
+
+.bloco2 p {
+    font-size: 1.2em; 
+}
+.bloco2 b {
+    font-size: 1.3em; 
+}
+
 .DuvidasContainer{
     display: flex;
     justify-content: space-between;
@@ -48,30 +70,30 @@
 }
 
 .duvidas-container {
-    display: flex; /* Usando flexbox para alinhar os blocos lado a lado */
-    justify-content: space-between; /* Espaço entre os blocos */
-    width: 70%; /* Definindo a largura total dos blocos como 70% */
+    display: flex; 
+    justify-content: space-between; 
+    width: 70%; 
 }
 
 .duvida-bloco {
-    flex: 1; /* Cada bloco ocupa a mesma largura */
-    margin: 10px 0; /* Margem lateral entre os blocos */
-    padding: 20px; /* Espaçamento interno dos blocos */
-    border: 1px solid #ccc; /* Borda ao redor dos blocos */
-    border-radius: 8px; /* Bordas arredondadas */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    background-color: #FEDD2C; /* Cor de fundo dos blocos */
-    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+    flex: 1; 
+    margin: 10px 0; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    background-color: #fede2c; 
+    transition: background-color 0.3s; 
 }
 .duvidas-blocos {
-    display: flex; /* Usando flexbox para alinhar os blocos de perguntas */
-    flex-direction: column; /* Alinha os blocos em coluna */
-    width: 100%; /* Faz com que os blocos ocupem toda a largura disponível */
+    display: flex; 
+    flex-direction: column; 
+    width: 50%; 
     justify-content: space-between;
 }
 
 .duvida-bloco:hover {
-    background-color: #e0e0e0; /* Cor de fundo ao passar o mouse */
+    background-color: #e0e0e0; /* fundo passar mouse */
 }
 
 .resposta {
