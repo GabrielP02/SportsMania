@@ -39,7 +39,7 @@ const Navbar = () => {
                     className={`nav-link ${activeLink === "contato" ? "active" : ""}`} 
                     onClick={() => {
                         setActiveLink("contato");
-                        navigate("/AboutUs");
+                        navigate("/Contact");
                     }}
                 >
                     CONTATO
