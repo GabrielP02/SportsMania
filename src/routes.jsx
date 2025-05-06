@@ -12,6 +12,8 @@ import AboutUs from "./pages/AboutUs";
 import Perfil from "./pages/Perfil";
 import MyOrders from './pages/MyOrders';
 import Contact from './pages/Contact';  
+import Cards from './pages/Cards';  
+import AddCard from './pages/AddCard'; 
 
 const AppRoutes = () => {
   return (
@@ -28,6 +30,8 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.PERFIL} element={<Perfil />} />
       <Route path={APP_ROUTES.MY_ORDERS} element={<MyOrders />} />
       <Route path={APP_ROUTES.CONTACT} element={<Contact />} />  
+      <Route path={APP_ROUTES.CARDS} element={<Cards />} />  
+      <Route path={APP_ROUTES.AddCard} element={<AddCard />} />  
     </Routes>
   );
 };
