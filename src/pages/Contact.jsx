@@ -18,7 +18,7 @@ const Contact = () => {
   return (
     <><Navbar />
     <div className="container">
-      <h2>Contato</h2>
+      <h2>Fale Conosco</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nome">Nome:</label>
