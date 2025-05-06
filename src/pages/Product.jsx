@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/NavBar";
-import luva from "../assets/luva.png"; // Imagem fixa para o produto
+
 
 const ProductPage = () => {
   const { id } = useParams(); // Captura o ID do produto da URL
@@ -9,7 +9,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     // Busca os detalhes do produto pelo ID
-    fetch(`http://localhost:8080/api/produtos/find/${id}`)
+    fetch(`http://localhost:8080/api/produtos/find/id/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -33,7 +33,7 @@ const ProductPage = () => {
         {/* Div da imagem (direita) */}
         <div className="md:w-2/5 lg:w-2/5 flex justify-center items-start sticky top-6">
           <img
-            src={luva} // Imagem fixa
+            src={product.imagem}
             alt={product.nome}
             className="w-full max-w-md object-contain rounded-lg shadow-lg"
           />
@@ -55,13 +55,8 @@ const ProductPage = () => {
 
           {/* Descrição fixa */}
           <div className="mb-6 border-b pb-6">
-            <p className="font-bold mb-2">Respiráveis e feitas parcialmente com materiais reciclados</p>
             <p className="text-gray-700">
-              Desenvolvidas para as mãos femininas, estas luvas de treino NIKE oferecem um ajuste elegante 
-              e protetor. Leves e elásticas, elas possuem recortes nas costas para permitir que o ar circule. 
-              As palmas acolchoadas antiderrapantes oferecem excelente aderência enquanto você levanta os braços.
-              Feito com uma série de materiais reciclados e pelo menos 40% de conteúdo reaproveitado, este produto 
-              representa apenas uma das nossas soluções para ajudar a eliminar os resíduos plásticos.
+              {product.descricao || "Descrição do produto não disponível."}
             </p>
           </div>
 
