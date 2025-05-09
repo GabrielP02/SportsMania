@@ -8,7 +8,7 @@ const Adress = () => {
 <>
 <Navbar />
 
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrddWCojVRtJkn1RCAaHX6NpCAgffB4ks&callback=Function.prototype&loading=async&libraries=maps,marker&v=beta"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=YOU_API_KEY&callback=Function.prototype&loading=async&libraries=maps,marker&v=beta"></script>
 
 <div class="Adress-container" className="p-20">
 <h1 className="titulo">Conheça nossa loja física</h1>
