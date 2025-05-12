@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./cart.css";
 import Navbar from "../../components/NavBar";
-import { useCart } from "../../context/cartContext";
+import { useCart } from "../../context/CartContext";
 
 const Cart = () => {
   const { cart, dispatch } = useCart();
@@ -14,11 +14,7 @@ const Cart = () => {
     <div>
       <Navbar />
       <div className="cart-container">
-        <div className="cart-steps">
-          <span className="active">1 Carrinho</span>
-          <span>2 Identificação</span>
-          <span>3 Pagamento</span>
-        </div>
+      
 
         <div className="cart-content">
           <table className="cart-table">

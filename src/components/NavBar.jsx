@@ -3,17 +3,19 @@ import './navbar.css';
 import Sidebar from './Sidebar';
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext"; // Certifique-se de que o caminho está correto
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
     const navigate = useNavigate();
+    const { totalItems } = useCart(); // Pega o contador de itens
 
     return (
         <nav className="navbar">
             <div className="left-section">
                 <Sidebar />
                 <span 
-                    className="logo cursor-pointer" 
+                    className="logo cursor-pointer"
                     onClick={() => {
                         setActiveLink("home");
                         navigate("/homepage");
@@ -44,11 +46,11 @@ const Navbar = () => {
                 >
                     CONTATO
                 </span>
-                
-                <FaShoppingCart 
-                    className="cart-icon cursor-pointer" 
-                    onClick={() => navigate("/cart")} 
-                />
+
+                <div className="cart-container" onClick={() => navigate("/cart")}>
+                    <FaShoppingCart className="cart-icon cursor-pointer" />
+                    {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+                </div>
             </div>
         </nav>
     );
