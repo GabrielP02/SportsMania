@@ -16,10 +16,33 @@ const SignUp = () => {
     navigate(APP_ROUTES.SIGN_IN)
   }
 
-  const handleRegister = () => {
-    console.log(nome);
-    console.log(email);
-    console.log(password);
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8080/api/persons/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 0,
+          username: nome, // usa o campo nome como username
+          password,
+          email,
+          personType: "ADMIN" // ou "USER", conforme sua regra
+        }),
+      });
+
+      if (response.ok) {
+        alert("Usuário cadastrado com sucesso!");
+        navigate(APP_ROUTES.SIGN_IN);
+      } else {
+        alert("Erro ao cadastrar usuário.");
+      }
+    } catch (error) {
+      alert("Erro ao cadastrar usuário.");
+      console.error(error);
+    }
   }
 
   return (
