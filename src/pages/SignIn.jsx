@@ -7,14 +7,32 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
-    console.log(email);
-    console.log(password);
-    // Adicione aqui sua lógica de autenticação
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          password,
+        }),
+      });
 
-    // Redireciona para a homepage após o login
-    navigate(APP_ROUTES.HOME_PAGE);
+      if (response.ok) {
+        const data = await response.json();
+        // Supondo que o token venha em data.token
+        localStorage.setItem("token", data.token);
+        navigate(APP_ROUTES.HOME_PAGE);
+      } else {
+        alert("E-mail ou senha inválidos.");
+      }
+    } catch (error) {
+      alert("Erro ao fazer login.");
+      console.error(error);
+    }
   }
 
   const handleSignUpRedirect = () => {
@@ -57,8 +75,8 @@ const SignIn = () => {
             <div>
               <input
                 className="border-2 outline-none rounded-md w-3/3 "
-                type="email"
-                placeholder="Digite seu E-mail"
+                type="text"
+                placeholder="Usuário"
                 value={email}
                 required
                 onChange={(e) => { setEmail(e.target.value); }}
