@@ -23,8 +23,11 @@ const SignIn = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         // Supondo que o token venha em data.token
         localStorage.setItem("token", data.token);
+        localStorage.setItem("clienteId", data.id);      // Salva o id do usuário
+        localStorage.setItem("clienteNome", data.nome);  // Salva o nome do usuário
         navigate(APP_ROUTES.HOME_PAGE);
       } else {
         alert("E-mail ou senha inválidos.");

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/NavBar";
-import { useCart } from "../context/cartContext"; // Importa o contexto
 
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { dispatch } = useCart(); // Hook do carrinho
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/produtos/find/id/${id}`)
@@ -22,18 +20,36 @@ const ProductPage = () => {
       .catch((error) => console.error("Erro ao buscar produto:", error));
   }, [id]);
 
-  const handleAddToCart = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
-        id: product.id,
-        nome: product.nome,
-        preco: product.preco,
-        imagem: product.imagem,
-        quantidade: 1,
-      },
-    });
-    alert("Produto adicionado ao carrinho!");
+  const handleAddToCart = async () => {
+    const personId = localStorage.getItem("clienteId");
+    const token = localStorage.getItem("token");
+    if (!personId || !token) {
+      alert("Faça login para adicionar ao carrinho.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/carrinho/person/${personId}/adicionar?produtoId=${product.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+          // Não precisa de body!
+        }
+      );
+
+      if (response.ok) {
+        alert("Produto adicionado ao carrinho!");
+      } else {
+        alert("Erro ao adicionar produto ao carrinho.");
+      }
+    } catch (error) {
+      alert("Erro ao adicionar produto ao carrinho.");
+      console.error(error);
+    }
   };
 
   if (!product) {
@@ -58,9 +74,15 @@ const ProductPage = () => {
           <div className="mb-6">
             <p className="text-2xl font-bold">R$ {product.preco.toFixed(2)}</p>
             <p className="text-gray-600">
-              Ou 10x <span className="font-bold">R$ {(product.preco / 10).toFixed(2)}</span> sem juros
+              Ou 10x{" "}
+              <span className="font-bold">
+                R$ {(product.preco / 10).toFixed(2)}
+              </span>{" "}
+              sem juros
             </p>
-            <p className="text-blue-600 text-sm cursor-pointer hover:underline">Ver outras opções</p>
+            <p className="text-blue-600 text-sm cursor-pointer hover:underline">
+              Ver outras opções
+            </p>
           </div>
 
           <div className="mb-6 border-b pb-6">
@@ -72,10 +94,12 @@ const ProductPage = () => {
           <div className="mb-6 border-b pb-6">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-xl font-bold">Tamanhos</h2>
-              <p className="text-blue-600 text-sm cursor-pointer hover:underline">Guia de tamanhos</p>
+              <p className="text-blue-600 text-sm cursor-pointer hover:underline">
+                Guia de tamanhos
+              </p>
             </div>
             <div className="grid grid-cols-5 gap-2 mb-4">
-              {['2XS', 'P', 'M', 'G', 'GG'].map((size) => (
+              {["2XS", "P", "M", "G", "GG"].map((size) => (
                 <button
                   key={size}
                   className="py-2 border rounded-md text-center hover:border-black"
