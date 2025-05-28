@@ -1,39 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./cart.css";
 import Navbar from "../../components/NavBar";
-import { useCart } from "../../context/CartContext";
 
 const Cart = () => {
-  const { cart, dispatch } = useCart();
-  const [couponCode, setCouponCode] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState(0);
 
-  const total = cart.items.reduce((sum, item) => sum + item.preco * item.quantidade, 0);
-
-  // Agora pega o ID do cliente logado do localStorage
   const clienteId = localStorage.getItem("clienteId");
 
-  if (!clienteId) {
-    alert("Faça login para finalizar a compra.");
-    // Redirecione para a tela de login, se desejar:
-    // navigate(APP_ROUTES.SIGN_IN);
-  }
+  useEffect(() => {
+    if (!clienteId) {
+      alert("Faça login para visualizar o carrinho.");
+      return;
+    }
+    const token = localStorage.getItem("token");
+    fetch(`http://localhost:8080/api/carrinho/person/${clienteId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao buscar carrinho");
+        return res.json();
+      })
+      .then((data) => {
+        // Ajuste conforme a estrutura do seu DTO de resposta
+        setCartItems(data.produtos || data.items || []);
+        // Calcule o total
+        let sum = 0;
+        (data.produtos || data.items || []).forEach(
+          (item) => (sum += (item.preco || 0) * (item.quantidade || 1))
+        );
+        setTotal(sum);
+      })
+      .catch((err) => {
+        console.error(err);
+        setCartItems([]);
+        setTotal(0);
+      });
+  }, [clienteId]);
 
   const handlePagamento = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/pagamento/carrinho/${clienteId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token && { Authorization: `Bearer ${token}` }),
-        },
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/pagamento/carrinho/${clienteId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+        }
+      );
 
       if (response.ok) {
-        const data = await response.json();
-        if (data.url) {
-          window.location.href = data.url; // Redireciona para o Mercado Pago
+        const url = await response.text();
+        if (url && url.startsWith("http")) {
+          window.location.href = url;
         } else {
           alert("URL de pagamento não recebida.");
         }
@@ -62,29 +87,34 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cart.items.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <img src={item.imagem} alt={item.nome} className="cart-img" />
-                      {item.nome}
-                    </div>
-                  </td>
-                  <td>{item.quantidade}</td>
-                  <td>R$ {item.preco.toFixed(2)}</td>
-                  <td>R$ {(item.preco * item.quantidade).toFixed(2)}</td>
-                  <td>
-                    <button
-                      onClick={() =>
-                        dispatch({ type: "REMOVE_FROM_CART", payload: item.id })
-                      }
-                      className="text-red-600 font-bold hover:underline"
-                    >
-                      ❌
-                    </button>
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
+                  <tr key={item.id}>
+                    <td>
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={item.imagem}
+                          alt={item.nome}
+                          className="cart-img"
+                        />
+                        {item.nome}
+                      </div>
+                    </td>
+                    <td>{item.quantidade}</td>
+                    <td>R$ {item.preco.toFixed(2)}</td>
+                    <td>R$ {(item.preco * item.quantidade).toFixed(2)}</td>
+                    <td>
+                      {/* Aqui você pode implementar a remoção do backend se desejar */}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="text-center text-gray-500">
+                    Carrinho vazio.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -96,7 +126,11 @@ const Cart = () => {
           </div>
         </div>
 
-        <button className="continue-btn" onClick={handlePagamento}>
+        <button
+          className="continue-btn"
+          onClick={handlePagamento}
+          disabled={cartItems.length === 0}
+        >
           Pagar com Mercado Pago
         </button>
       </div>
