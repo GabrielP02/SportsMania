@@ -11,8 +11,8 @@ export const APP_ROUTES = {
   MY_ORDERS: '/pedidos',
   CONTACT: '/contact',
   CARDS: '/cards',
-  SUCCESS: '/pagamento/sucesso',
-  FAILURE: '/pagamento/erro',
-  PENDING: '/pagamento/pendente'
+  SUCCESS: '/sucesso',
+  FAILURE: '/erro',
+  PENDING: '/pendente'
 
 };

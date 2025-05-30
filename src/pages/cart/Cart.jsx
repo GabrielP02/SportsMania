@@ -56,12 +56,13 @@ const Cart = () => {
       );
 
       if (response.ok) {
-        const url = await response.text();
-        if (url && url.startsWith("http")) {
-          window.location.href = url;
-        } else {
-          alert("URL de pagamento não recebida.");
-        }
+      const data = await response.json();
+      const url = data.init_point;
+      if (url && url.startsWith("http")) {
+         window.location.href = url;
+      } else {
+      alert("URL de pagamento não recebida.");
+      }
       } else {
         alert("Erro ao iniciar pagamento.");
       }
