@@ -10,6 +10,9 @@ export const APP_ROUTES = {
   PERFIL: '/perfil',
   MY_ORDERS: '/pedidos',
   CONTACT: '/contact',
-  CARDS: '/cards'
+  CARDS: '/cards',
+  SUCCESS: '/pagamento/sucesso',
+  FAILURE: '/pagamento/erro',
+  PENDING: '/pagamento/pendente'
 
 };

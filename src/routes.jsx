@@ -11,13 +11,12 @@ import Product from "./pages/Product";
 import AboutUs from "./pages/AboutUs";
 import Perfil from "./pages/Perfil";
 import MyOrders from './pages/MyOrders';
-import Contact from './pages/Contact';  
-import Cards from './pages/Cards';  
-import AddCard from './pages/AddCard'; 
+import Contact from './pages/Contact';
+import Cards from './pages/Cards';
+import AddCard from './pages/AddCard';
 import Success from "./pages/backPages/Success";
 import Failure from "./pages/backPages/Failure";
 import Pending from "./pages/backPages/Pending";
-import Success from "./pages/backPages/Success";
 
 const AppRoutes = () => {
   return (
@@ -37,7 +36,7 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.CARDS} element={<Cards />} />  
       <Route path={APP_ROUTES.AddCard} element={<AddCard />} />
       <Route path={APP_ROUTES.SUCCESS} element={<Success />} />
-      <Route path={APP_ROUTES.FAILURE}element={<Failure />} />
+      <Route path={APP_ROUTES.FAILURE} element={<Failure />} />
       <Route path={APP_ROUTES.PENDING} element={<Pending />} />
     </Routes>
   );
