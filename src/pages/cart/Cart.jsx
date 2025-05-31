@@ -72,6 +72,49 @@ const Cart = () => {
     }
   };
 
+  const handleRemoveItem = async (produtoId) => {
+    const clienteId = localStorage.getItem("clienteId");
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/carrinho/person/${clienteId}/remover/${produtoId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+        }
+      );
+      if (response.ok) {
+        // Recarregue o carrinho do backend para garantir atualização
+        const res = await fetch(
+          `http://localhost:8080/api/carrinho/person/${clienteId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              ...(token && { Authorization: `Bearer ${token}` }),
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setCartItems(data.produtos || data.items || []);
+          let sum = 0;
+          (data.produtos || data.items || []).forEach(
+            (item) => (sum += (item.preco || 0) * (item.quantidade || 1))
+          );
+          setTotal(sum);
+        }
+      } else {
+        alert("Erro ao remover produto do carrinho.");
+      }
+    } catch (error) {
+      alert("Erro ao remover produto do carrinho.");
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -105,7 +148,12 @@ const Cart = () => {
                     <td>R$ {item.preco.toFixed(2)}</td>
                     <td>R$ {(item.preco * item.quantidade).toFixed(2)}</td>
                     <td>
-                      {/* Aqui você pode implementar a remoção do backend se desejar */}
+                      <button
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="text-red-600 font-bold hover:underline"
+                      >
+                        ❌
+                      </button>
                     </td>
                   </tr>
                 ))

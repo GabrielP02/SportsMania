@@ -4,7 +4,7 @@ import AppRoutes from "./routes";
 import NavBar from "./components/NavBar";  
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar"; 
-import { CartProvider } from "./context/cartContext";
+import { CartProvider } from "./context/cartContext_temp";
 
 const App = () => {
   return (

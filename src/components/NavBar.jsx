@@ -3,7 +3,7 @@ import './navbar.css';
 import Sidebar from './Sidebar';
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../context/cartContext1";
+import {useCart} from "../context/cartContext_temp";
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
