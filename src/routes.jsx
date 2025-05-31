@@ -14,9 +14,9 @@ import MyOrders from './pages/MyOrders';
 import Contact from './pages/Contact';
 import Cards from './pages/Cards';
 import AddCard from './pages/AddCard';
-import Success from "./pages/BackPages/Success";
-import Failure from "./pages/BackPages/Failure";
-import Pending from "./pages/BackPages/Pending";
+import Success from "./pages/backPages/Success";
+import Failure from "./pages/backPages/Failure";
+import Pending from "./pages/backPages/Pending";
 
 const AppRoutes = () => {
   return (
