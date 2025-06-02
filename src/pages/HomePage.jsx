@@ -6,7 +6,7 @@ import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import banner from "../assets/banner.jpg";
 import Navbar from "../components/NavBar";
-import imagemIndisponivel from "../assets/ImagemIndisponivel.png";
+import imagemIndisponivel from "../assets/imagemIndisponivel.png";
 
 const ProductCard = ({ id, nome, preco, imagem }) => {
   const navigate = useNavigate();
