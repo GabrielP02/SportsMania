@@ -10,8 +10,13 @@ const App = () => {
   return (
     <CartProvider>
     <Router>
-      <AppRoutes />
-      <Footer />
+      <div className="min-h-screen flex flex-col">
+        
+        <main className="flex-1">
+          <AppRoutes />
+        </main>
+        <Footer />
+      </div>
     </Router>
     </CartProvider>
   );

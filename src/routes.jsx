@@ -17,11 +17,20 @@ import AddCard from './pages/AddCard';
 import Success from "./pages/backPages/Success";
 import Failure from "./pages/backPages/Failure";
 import Pending from "./pages/backPages/Pending";
+import Academia from "./pages/CategoriasPage/Academia";
+import Basquete from "./pages/CategoriasPage/Basquete";
+import Ciclismo from "./pages/CategoriasPage/Ciclismo";
+import Futebol from "./pages/CategoriasPage/Futebol";
+import Luta from "./pages/CategoriasPage/Luta";
+import Natacao from "./pages/CategoriasPage/Natacao";
+import Todos from "./pages/CategoriasPage/Todos";
+import Variados from "./pages/CategoriasPage/Variados";
+import Voleibol from "./pages/CategoriasPage/Voleibol";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={APP_ROUTES.SIGN_IN} />} />
+      <Route path="/" element={<HomePage />} /> {/* Página inicial */}
       <Route path={APP_ROUTES.SIGN_UP} element={<SignUp />} />
       <Route path={APP_ROUTES.SIGN_IN} element={<SignIn />} />
       <Route path={APP_ROUTES.SEARCH_PAGE} element={<SearchPage />} />
@@ -38,6 +47,15 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.SUCCESS} element={<Success />} />
       <Route path={APP_ROUTES.FAILURE} element={<Failure />} />
       <Route path={APP_ROUTES.PENDING} element={<Pending />} />
+      <Route path={APP_ROUTES.ACADEMIA} element={<Academia />} />
+      <Route path={APP_ROUTES.BASQUETE} element={<Basquete />} />
+      <Route path={APP_ROUTES.CICLISMO} element={<Ciclismo />} />
+      <Route path={APP_ROUTES.FUTEBOL} element={<Futebol />} />
+      <Route path={APP_ROUTES.LUTA} element={<Luta />} />
+      <Route path={APP_ROUTES.NATACAO} element={<Natacao />} />
+      <Route path={APP_ROUTES.TODOS} element={<Todos />} />
+      <Route path={APP_ROUTES.VARIADOS} element={<Variados />} />
+      <Route path={APP_ROUTES.VOLEIBOL} element={<Voleibol />} />
     </Routes>
   );
 };

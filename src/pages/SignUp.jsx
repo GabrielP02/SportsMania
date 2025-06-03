@@ -1,20 +1,13 @@
-import React from "react";
-import { APP_ROUTES } from "../utils/constants";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { APP_ROUTES } from "../utils/constants";
+import jogador2 from "../assets/jogador2.png"; // Imagem ilustrativa
 
 const SignUp = () => {
-
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  const handleClickEntrar = () => {
-
-    navigate(APP_ROUTES.SIGN_IN)
-  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -26,7 +19,7 @@ const SignUp = () => {
         },
         body: JSON.stringify({
           id: 0,
-          username: nome, // usa o campo nome como username
+          username: nome,
           password,
           email,
           personType: "ADMIN" // ou "USER", conforme sua regra
@@ -43,89 +36,89 @@ const SignUp = () => {
       alert("Erro ao cadastrar usuário.");
       console.error(error);
     }
-  }
+  };
 
   return (
-    <>
-      <div className="flex flex-row-reverse items-center h-auto min-h-screen">
-
-        <div className="bg-yellow-500 rounded-l-[13vw] w-1/2 flex flex-col items-center justify-center h-screen gap-8">
-          <h1 className="text-center font-normal text-4xl mb-4">
-            Seja bem-vindo a
-          </h1>
-          <h1 className="text-center font-extrabold text-4xl mb-4">
-            SPORTS MANIA
-          </h1>
-          <h3 className="text-center font-normal text-xl mb-4">
-            Clique abaixo para se registrar
-          </h3>
-          <div className="flex flex-col items-center w-3/3">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-red-700 relative"
+      style={{
+        overflow: "hidden",
+      }}
+    >
+      {/* Wallpaper esportivo desfocado e transparente */}
+      <img
+        src="https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg"
+        alt="Wallpaper esportivo"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          filter: "blur(6px)",
+          opacity: 0.25,
+          zIndex: 0,
+        }}
+      />
+      <div className="bg-white rounded-3xl shadow-lg flex w-full max-w-3xl overflow-hidden relative z-10 flex-row-reverse">
+        {/* Formulário do lado direito */}
+        <div className="flex-1 flex flex-col justify-center px-12 py-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
+            CRIE SUA CONTA
+          </h2>
+          <form onSubmit={handleRegister} className="flex flex-col gap-6">
+            <input
+              type="text"
+              placeholder="Nome de usuário"
+              className="rounded-full px-6 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="E-mail"
+              className="rounded-full px-6 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Senha"
+              className="rounded-full px-6 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             <button
-              className="flex justify-center p-2 rounded-md w-1/3 self-center bg-black hover:bg-neutral-900 text-yellow-300"
-              onClick={handleClickEntrar}
+              type="submit"
+              className="rounded-full py-3 bg-gradient-to-r from-blue-600 to-red-700 text-white font-bold text-lg tracking-wider shadow-md hover:scale-105 transition"
             >
-              <span className="text-xl font-normal">
-                REGISTRE-SE
-              </span>
+              REGISTRAR
+            </button>
+          </form>
+          <div className="mt-8 text-center">
+            <span className="text-gray-600">Já tem uma conta?</span>
+            <button
+              className="ml-2 text-blue-600 font-semibold hover:underline"
+              onClick={() => navigate(APP_ROUTES.SIGN_IN)}
+            >
+              Entrar
             </button>
           </div>
         </div>
-
-        <div className="h-1/2 shadow-lg rounded-md bg-white p-8 flex flex-col w-2/3 sm:w-1/2">
-
-          <h2 className="text-center font-medium text-2xl mb-4">
-            Entre na sua conta
-          </h2>
-
-          <div className="flex flex-col justify-center items-center w-full">
-            <form className='gap-8 flex flex-col justify-center items-center w-full'>
-              <div>
-                <input
-                  className="border-2 outline-none rounded-md w-3/3"
-                  type="text"
-                  placeholder="Digite seu nome"
-                  value={nome}
-                  required
-                  onChange={(e) => { setNome(e.target.value); }}
-                />
-              </div>
-              <div>
-                <input
-                  className="border-2 outline-none rounded-md w-3/3 "
-                  type="email"
-                  placeholder="Digite seu E-mail"
-                  value={email}
-                  required
-                  onChange={(e) => { setEmail(e.target.value); }}
-                />
-              </div>
-              <div>
-                <input
-                  className="border-2 outline-none rounded-md w-3/3"
-                  type="password"
-                  placeholder="*******"
-                  value={password}
-                  required
-                  onChange={(e) => { setPassword(e.target.value); }}
-                />
-              </div>
-              <div className="flex flex-col items-center w-3/3">
-                <button
-                  className="flex justify-center p-2 rounded-md w-1/2 self-center bg-gray-800  text-white hover:bg-gray-700 hover:scale-102  transition-all duration-150 ease-in-out"
-                  onClick={handleRegister}
-                >
-                  <span>
-                    Entrar
-                  </span>
-                </button>
-              </div>
-            </form>
-          </div>
+        {/* Imagem ilustrativa ao lado esquerdo */}
+        <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-500 to-red-700 relative">
+          <img
+            src={jogador2}
+            alt="Soccer player illustration"
+            className="object-contain max-h-[420px] max-w-[360px] drop-shadow-lg"
+            style={{
+              margin: "0 auto",
+              display: "block",
+            }}
+          />
         </div>
-
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default SignUp;

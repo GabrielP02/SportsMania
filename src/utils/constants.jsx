@@ -13,6 +13,14 @@ export const APP_ROUTES = {
   CARDS: '/cards',
   SUCCESS: '/sucesso',
   FAILURE: '/erro',
-  PENDING: '/pendente'
-
+  PENDING: '/pendente',
+  ACADEMIA: '/academia',
+  BASQUETE: '/basquete',
+  CICLISMO: '/ciclismo',
+  FUTEBOL: '/futebol',
+  LUTA: '/luta',
+  NATACAO: '/natacao',
+  VOLEIBOL: '/voleibol',
+  VARIADOS: '/variados',
+  TODOS: '/todos'
 };
