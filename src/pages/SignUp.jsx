@@ -19,7 +19,7 @@ const SignUp = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/persons/create", {
+      const response = await fetch("https://sportsmaniaback.onrender.com/api/persons/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

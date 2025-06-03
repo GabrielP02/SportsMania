@@ -31,7 +31,7 @@ const HomePage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/produtos/find/all")
+    fetch("https://sportsmaniaback.onrender.com/api/produtos/find/all")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

@@ -7,7 +7,7 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/produtos/find/id/${id}`)
+    fetch(`https://sportsmaniaback.onrender.com/api/produtos/find/id/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -30,7 +30,7 @@ const ProductPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/carrinho/person/${personId}/adicionar?produtoId=${product.id}`,
+        `https://sportsmaniaback.onrender.com/api/carrinho/person/${personId}/adicionar?produtoId=${product.id}`,
         {
           method: "POST",
           headers: {
