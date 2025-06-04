@@ -14,7 +14,7 @@ const Cart = () => {
       return;
     }
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:8080/api/carrinho/person/${clienteId}`, {
+    fetch(`https://sportsmaniaback.onrender.com/api/person/${clienteId}`, {
       headers: {
         "Content-Type": "application/json",
         ...(token && { Authorization: `Bearer ${token}` }),
