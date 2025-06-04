@@ -14,7 +14,7 @@ const Cart = () => {
       return;
     }
     const token = localStorage.getItem("token");
-    fetch(`https://sportsmaniaback.onrender.com/api/person/${clienteId}`, {
+    fetch(`https://sportsmaniaback.onrender.com/api/carrinho/person/${clienteId}`, {
       headers: {
         "Content-Type": "application/json",
         ...(token && { Authorization: `Bearer ${token}` }),
@@ -45,7 +45,7 @@ const Cart = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:8080/api/pagamento/carrinho/${clienteId}`,
+        `https://sportsmaniaback.onrender.com/api/pagamento/carrinho/${clienteId}`,
         {
           method: "POST",
           headers: {
@@ -77,7 +77,7 @@ const Cart = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/carrinho/person/${clienteId}/remover/${produtoId}`,
+        `https://sportsmaniaback.onrender.com/api/carrinho/person/${clienteId}/remover/${produtoId}`,
         {
           method: "DELETE",
           headers: {
