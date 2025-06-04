@@ -89,7 +89,7 @@ const Cart = () => {
       if (response.ok) {
         // Recarregue o carrinho do backend para garantir atualização
         const res = await fetch(
-          `http://localhost:8080/api/carrinho/person/${clienteId}`,
+          `https://sportsmaniaback.onrender.com/api/carrinho/person/${clienteId}`,
           {
             headers: {
               "Content-Type": "application/json",
