@@ -5,6 +5,7 @@ import Navbar from "../components/NavBar";
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     fetch(`https://sportsmaniaback.onrender.com/api/produtos/find/id/${id}`)
@@ -36,8 +37,8 @@ const ProductPage = () => {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-          }
-          // Não precisa de body!
+          },
+          body: JSON.stringify({ quantidade: quantity }), // Envie a quantidade desejada
         }
       );
 
@@ -108,6 +109,21 @@ const ProductPage = () => {
                 </button>
               ))}
             </div>
+          </div>
+
+          <div className="mb-6">
+            <label className="block font-bold mb-2">Quantidade</label>
+            <input
+              type="number"
+              min={1}
+              max={product.quantidade}
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              className="w-20 border rounded-md p-2"
+            />
+            <span className="ml-2 text-gray-500">
+              Disponível: {product.quantidade}
+            </span>
           </div>
 
           {/* Botão de adicionar ao carrinho */}
