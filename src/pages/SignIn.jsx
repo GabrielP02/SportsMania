@@ -26,7 +26,7 @@ const SignIn = () => {
         const data = await response.json();
         localStorage.setItem("token", data.token);
         localStorage.setItem("clienteId", data.id);
-        localStorage.setItem("clienteNome", data.nome);
+        localStorage.setItem("clienteNome", data.username);
         navigate(APP_ROUTES.HOME_PAGE);
       } else {
         alert("E-mail ou senha inválidos.");
