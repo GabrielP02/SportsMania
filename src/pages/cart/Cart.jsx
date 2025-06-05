@@ -77,13 +77,14 @@ const Cart = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `https://sportsmaniaback.onrender.com/api/carrinho/person/${clienteId}/remover/${produtoId}`,
+        `https://sportsmaniaback.onrender.com/api/carrinho/person/${clienteId}/remover?produtoId=${produtoId}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             ...(token && { Authorization: `Bearer ${token}` }),
           },
+          body: JSON.stringify({ quantidade: 1 }),
         }
       );
       if (response.ok) {
