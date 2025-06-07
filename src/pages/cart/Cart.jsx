@@ -100,6 +100,16 @@ const Cart = () => {
             "Content-Type": "application/json",
             ...(token && { Authorization: `Bearer ${token}` }),
           },
+          body: JSON.stringify({
+            frete: servicoSelecionado
+              ? {
+                  id: servicoSelecionado.id,
+                  name: servicoSelecionado.name,
+                  price: Number(servicoSelecionado.price),
+                  delivery_time: servicoSelecionado.delivery_time,
+                }
+              : null,
+          }),
         }
       );
 
@@ -125,14 +135,14 @@ const Cart = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `https://sportsmaniaback.onrender.com/api/carrinho/person/${clienteId}/remover?produtoId=${produtoId}`,
+        `https://sportsmaniaback.onrender.com/api/carrinho/${clienteId}/produto/${produtoId}?quantidadeParaRemover=1`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             ...(token && { Authorization: `Bearer ${token}` }),
-          },
-          body: JSON.stringify({ quantidade: 1 }),
+          }
+          // Não precisa de body!
         }
       );
       if (response.ok) {

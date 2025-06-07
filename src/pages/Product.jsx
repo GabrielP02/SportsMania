@@ -31,14 +31,13 @@ const ProductPage = () => {
 
     try {
       const response = await fetch(
-        `https://sportsmaniaback.onrender.com/api/carrinho/person/${personId}/adicionar?produtoId=${product.id}`,
+        `https://sportsmaniaback.onrender.com/api/carrinho/${personId}/produto/${product.id}?quantidade=${quantity}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ quantidade: quantity }), // Envie a quantidade desejada
+          }
         }
       );
 
