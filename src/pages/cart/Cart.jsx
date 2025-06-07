@@ -245,7 +245,7 @@ const Cart = () => {
               {frete
                 .filter(
                   opcao =>
-                    (opcao.id === "1" || opcao.id === "2") &&
+                    (opcao.id === "1" || opcao.id === "2" || opcao.id === 1 || opcao.id === 2) &&
                     opcao.price &&
                     !isNaN(Number(opcao.price))
                 )
@@ -266,7 +266,7 @@ const Cart = () => {
               {/* Mensagem caso nenhuma opção válida */}
               {frete.filter(
                 opcao =>
-                  (opcao.id === "1" || opcao.id === "2") &&
+                  (opcao.id === "1" || opcao.id === "2" || opcao.id === 1 || opcao.id === 2) &&
                   opcao.price &&
                   !isNaN(Number(opcao.price))
               ).length === 0 && (
