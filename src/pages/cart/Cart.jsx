@@ -5,6 +5,9 @@ import Navbar from "../../components/NavBar";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const [cepDestino, setCepDestino] = useState("");
+  const [frete, setFrete] = useState(null);
+  const [calculandoFrete, setCalculandoFrete] = useState(false);
 
   const clienteId = localStorage.getItem("clienteId");
 
@@ -25,9 +28,7 @@ const Cart = () => {
         return res.json();
       })
       .then((data) => {
-        // Ajuste conforme a estrutura do seu DTO de resposta
         setCartItems(data.produtos || data.items || []);
-        // Calcule o total
         let sum = 0;
         (data.produtos || data.items || []).forEach(
           (item) => (sum += (item.preco || 0) * (item.quantidade || 1))
@@ -40,6 +41,43 @@ const Cart = () => {
         setTotal(0);
       });
   }, [clienteId]);
+
+  const handleCalcularFrete = async () => {
+    setCalculandoFrete(true);
+    try {
+      const payload = {
+        cepOrigem: "52070-210", // fixo
+        cepDestino: cepDestino,
+        produtos: cartItems.map(item => ({
+          weight: 0.8,    // fixo
+          width: 25,      // fixo
+          height: 12,     // fixo
+          length: 30,     // fixo
+          quantity: item.quantidade
+        })),
+        servicos: ["1", "2"]
+      };
+      const response = await fetch("https://sportsmaniaback.onrender.com/calcular-frete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (response.ok) {
+        const resultado = await response.json();
+        setFrete(resultado); // resultado deve conter { valor: ..., prazo: ... }
+      } else {
+        setFrete(null);
+        alert("Erro ao calcular frete.");
+      }
+    } catch (error) {
+      setFrete(null);
+      alert("Erro ao calcular frete.");
+      console.error(error);
+    }
+    setCalculandoFrete(false);
+  };
+
+  const precoTotal = total + (frete?.valor || 0);
 
   const handlePagamento = async () => {
     try {
@@ -169,10 +207,48 @@ const Cart = () => {
           </table>
         </div>
 
+        {/* Campo para calcular frete */}
+        <div className="cart-frete">
+          <label htmlFor="cepDestino" className="block mb-2 font-bold">Calcule o frete</label>
+          <div className="flex gap-2 mb-2">
+            <input
+              id="cepDestino"
+              type="text"
+              placeholder="Digite seu CEP"
+              value={cepDestino}
+              onChange={e => setCepDestino(e.target.value)}
+              className="border rounded-md p-2"
+              maxLength={9}
+            />
+            <button
+              onClick={handleCalcularFrete}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md font-bold"
+              disabled={calculandoFrete || !cepDestino}
+            >
+              {calculandoFrete ? "Calculando..." : "Calcular"}
+            </button>
+          </div>
+          {frete && (
+            <div className="mt-2 text-green-700 font-bold">
+              Frete: R$ {Number(frete.valor).toFixed(2)} ({frete.prazo} dias úteis)
+            </div>
+          )}
+        </div>
+
         <div className="cart-summary">
+          <div className="total-row">
+            <span>Subtotal</span>
+            <span>R$ {total.toFixed(2)}</span>
+          </div>
+          <div className="total-row">
+            <span>Frete</span>
+            <span>
+              {frete ? `R$ ${Number(frete.valor).toFixed(2)}` : "--"}
+            </span>
+          </div>
           <div className="total-row grand-total">
             <span>Total da compra</span>
-            <span>R$ {total.toFixed(2)}</span>
+            <span>R$ {precoTotal.toFixed(2)}</span>
           </div>
         </div>
 
