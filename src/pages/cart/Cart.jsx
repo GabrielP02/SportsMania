@@ -64,7 +64,7 @@ const Cart = () => {
       });
       if (response.ok) {
         const resultado = await response.json();
-        setFrete(resultado);
+        console.log("Resultado do frete:", resultado);
       } else {
         setFrete(null);
         alert("Erro ao calcular frete.");
