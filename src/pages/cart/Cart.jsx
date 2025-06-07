@@ -209,7 +209,7 @@ const Cart = () => {
                     <td>R$ {((item.produto.preco || 0) * (item.quantidade || 1)).toFixed(2)}</td>
                     <td>
                       <button
-                        onClick={() => handleRemoveItem(item.id)}
+                        onClick={() => handleRemoveItem(item.produto.id)}
                         className="text-red-600 font-bold hover:underline"
                       >
                         ❌
