@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Cart.css";
 import Navbar from "../../components/NavBar";
 
@@ -6,7 +6,8 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [cepDestino, setCepDestino] = useState("");
-  const [frete, setFrete] = useState(null);
+  const [frete, setFrete] = useState([]);
+  const [servicoSelecionado, setServicoSelecionado] = useState(null);
   const [calculandoFrete, setCalculandoFrete] = useState(false);
 
   const clienteId = localStorage.getItem("clienteId");
@@ -64,20 +65,29 @@ const Cart = () => {
       });
       if (response.ok) {
         const resultado = await response.json();
-        console.log("Resultado do frete:", resultado);
+        setFrete(resultado); // resultado é um array de opções de frete
+        setServicoSelecionado(null); // reseta seleção ao recalcular
       } else {
-        setFrete(null);
+        setFrete([]);
+        setServicoSelecionado(null);
         alert("Erro ao calcular frete.");
       }
     } catch (error) {
-      setFrete(null);
+      setFrete([]);
+      setServicoSelecionado(null);
       alert("Erro ao calcular frete.");
       console.error(error);
     }
     setCalculandoFrete(false);
   };
 
-  const precoTotal = total + (frete && Array.isArray(frete) && frete.length > 0 ? Number(frete[0].price) : 0);
+  // Calcula o total com o frete selecionado
+  const precoTotal = useMemo(() => {
+    if (servicoSelecionado) {
+      return total + Number(servicoSelecionado.price);
+    }
+    return total;
+  }, [total, servicoSelecionado]);
 
   const handlePagamento = async () => {
     try {
@@ -94,13 +104,13 @@ const Cart = () => {
       );
 
       if (response.ok) {
-      const data = await response.json();
-      const url = data.init_point;
-      if (url && url.startsWith("http")) {
-         window.location.href = url;
-      } else {
-      alert("URL de pagamento não recebida.");
-      }
+        const data = await response.json();
+        const url = data.init_point;
+        if (url && url.startsWith("http")) {
+          window.location.href = url;
+        } else {
+          alert("URL de pagamento não recebida.");
+        }
       } else {
         alert("Erro ao iniciar pagamento.");
       }
@@ -228,9 +238,24 @@ const Cart = () => {
               {calculandoFrete ? "Calculando..." : "Calcular"}
             </button>
           </div>
+          {/* Opções de frete para o usuário escolher */}
           {frete && Array.isArray(frete) && frete.length > 0 && (
-            <div className="mt-2 text-green-700 font-bold">
-              Frete: R$ {Number(frete[0].price).toFixed(2)} ({frete[0].delivery_time} dias úteis)
+            <div className="mt-2">
+              <label className="block font-bold mb-1">Escolha o serviço de entrega:</label>
+              {frete.map((opcao, idx) => (
+                <div key={idx} className="flex items-center gap-2 mb-1">
+                  <input
+                    type="radio"
+                    name="servico-frete"
+                    value={opcao.id}
+                    checked={servicoSelecionado && servicoSelecionado.id === opcao.id}
+                    onChange={() => setServicoSelecionado(opcao)}
+                  />
+                  <span>
+                    {opcao.name} - R$ {Number(opcao.price).toFixed(2)} ({opcao.delivery_time} dias úteis)
+                  </span>
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -243,8 +268,8 @@ const Cart = () => {
           <div className="total-row">
             <span>Frete</span>
             <span>
-              {frete && Array.isArray(frete) && frete.length > 0
-                ? `R$ ${Number(frete[0].price).toFixed(2)}`
+              {servicoSelecionado
+                ? `R$ ${Number(servicoSelecionado.price).toFixed(2)}`
                 : "--"}
             </span>
           </div>
