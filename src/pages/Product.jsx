@@ -31,7 +31,7 @@ const ProductPage = () => {
 
     try {
       const response = await fetch(
-        `https://sportsmaniaback.onrender.com/api/carrinho/${personId}/produto/${product.id}?quantidade=${quantity}`,
+        `https://sportsmaniaback.onrender.com/api/carrinho/person/${personId}/produto/${product.id}?quantidade=${quantity}`,
         {
           method: "POST",
           headers: {
