@@ -205,8 +205,8 @@ const Cart = () => {
                       </div>
                     </td>
                     <td>{item.quantidade}</td>
-                    <td>R$ {item.preco.toFixed(2)}</td>
-                    <td>R$ {(item.preco * item.quantidade).toFixed(2)}</td>
+                    <td>R$ {(item.produto.preco || 0).toFixed(2)}</td>
+                    <td>R$ {((item.produto.preco || 0) * (item.quantidade || 1)).toFixed(2)}</td>
                     <td>
                       <button
                         onClick={() => handleRemoveItem(item.id)}
