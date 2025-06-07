@@ -242,20 +242,38 @@ const Cart = () => {
           {frete && Array.isArray(frete) && frete.length > 0 && (
             <div className="mt-2">
               <label className="block font-bold mb-1">Escolha o serviço de entrega:</label>
-              {frete.map((opcao, idx) => (
-                <div key={idx} className="flex items-center gap-2 mb-1">
-                  <input
-                    type="radio"
-                    name="servico-frete"
-                    value={opcao.id}
-                    checked={servicoSelecionado && servicoSelecionado.id === opcao.id}
-                    onChange={() => setServicoSelecionado(opcao)}
-                  />
-                  <span>
-                    {opcao.name} - R$ {Number(opcao.price).toFixed(2)} ({opcao.delivery_time} dias úteis)
-                  </span>
+              {frete
+                .filter(
+                  opcao =>
+                    (opcao.id === "1" || opcao.id === "2") &&
+                    opcao.price &&
+                    !isNaN(Number(opcao.price))
+                )
+                .map((opcao, idx) => (
+                  <div key={idx} className="flex items-center gap-2 mb-1">
+                    <input
+                      type="radio"
+                      name="servico-frete"
+                      value={opcao.id}
+                      checked={servicoSelecionado && servicoSelecionado.id === opcao.id}
+                      onChange={() => setServicoSelecionado(opcao)}
+                    />
+                    <span>
+                      {opcao.name} - R$ {Number(opcao.price).toFixed(2)} ({opcao.delivery_time} dias úteis)
+                    </span>
+                  </div>
+                ))}
+              {/* Mensagem caso nenhuma opção válida */}
+              {frete.filter(
+                opcao =>
+                  (opcao.id === "1" || opcao.id === "2") &&
+                  opcao.price &&
+                  !isNaN(Number(opcao.price))
+              ).length === 0 && (
+                <div className="text-red-600 font-bold mt-2">
+                  Nenhuma opção de frete disponível para o CEP informado.
                 </div>
-              ))}
+              )}
             </div>
           )}
         </div>
