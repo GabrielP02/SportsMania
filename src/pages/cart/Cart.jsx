@@ -29,11 +29,10 @@ const Cart = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("Carrinho recebido:", data);
         setCartItems(data.itens || data.produtos || data.items || []);
         let sum = 0;
         (data.itens || data.produtos || data.items || []).forEach(
-          (item) => (sum += (item.preco || 0) * (item.quantidade || 1))
+          (item) => (sum += (item.produto.preco || 0) * (item.quantidade || 1))
         );
         setTotal(sum);
       })
@@ -159,10 +158,10 @@ const Cart = () => {
         );
         if (res.ok) {
           const data = await res.json();
-          setCartItems(data.produtos || data.items || []);
+          setCartItems(data.itens || data.produtos || data.items || []);
           let sum = 0;
-          (data.produtos || data.items || []).forEach(
-            (item) => (sum += (item.preco || 0) * (item.quantidade || 1))
+          (data.itens || data.produtos || data.items || []).forEach(
+            (item) => (sum += (item.produto.preco || 0) * (item.quantidade || 1))
           );
           setTotal(sum);
         }
@@ -193,15 +192,11 @@ const Cart = () => {
             <tbody>
               {cartItems.length > 0 ? (
                 cartItems.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.produto.id}>
                     <td>
                       <div className="flex items-center gap-2">
-                        <img
-                          src={item.imagem}
-                          alt={item.nome}
-                          className="cart-img"
-                        />
-                        {item.nome}
+                        <img src={item.produto.imagem} alt={item.produto.nome} className="cart-img" />
+                        {item.produto.nome}
                       </div>
                     </td>
                     <td>{item.quantidade}</td>
