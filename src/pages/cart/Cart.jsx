@@ -29,6 +29,7 @@ const Cart = () => {
         return res.json();
       })
       .then((data) => {
+        console.log("Carrinho recebido:", data);
         setCartItems(data.produtos || data.items || []);
         let sum = 0;
         (data.produtos || data.items || []).forEach(
