@@ -46,16 +46,16 @@ const Cart = () => {
     setCalculandoFrete(true);
     try {
       const payload = {
-        cepOrigem: "52070-210", // fixo
-        cepDestino: cepDestino,
-        produtos: cartItems.map(item => ({
-          weight: 0.8,    // fixo
-          width: 25,      // fixo
-          height: 12,     // fixo
-          length: 30,     // fixo
+        from: { postal_code: "52070-210" },
+        to: { postal_code: cepDestino },
+        products: cartItems.map(item => ({
+          weight: 0.8,
+          width: 25,
+          height: 12,
+          length: 30,
           quantity: item.quantidade
         })),
-        servicos: ["1", "2"]
+        services: ["1", "2"]
       };
       const response = await fetch("https://sportsmaniaback.onrender.com/calcular-frete", {
         method: "POST",
@@ -64,7 +64,7 @@ const Cart = () => {
       });
       if (response.ok) {
         const resultado = await response.json();
-        setFrete(resultado); // resultado deve conter { valor: ..., prazo: ... }
+        setFrete(resultado);
       } else {
         setFrete(null);
         alert("Erro ao calcular frete.");
