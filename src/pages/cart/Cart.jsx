@@ -77,7 +77,7 @@ const Cart = () => {
     setCalculandoFrete(false);
   };
 
-  const precoTotal = total + (frete?.valor || 0);
+  const precoTotal = total + (frete && Array.isArray(frete) && frete.length > 0 ? Number(frete[0].price) : 0);
 
   const handlePagamento = async () => {
     try {
@@ -228,9 +228,9 @@ const Cart = () => {
               {calculandoFrete ? "Calculando..." : "Calcular"}
             </button>
           </div>
-          {frete && (
+          {frete && Array.isArray(frete) && frete.length > 0 && (
             <div className="mt-2 text-green-700 font-bold">
-              Frete: R$ {Number(frete.valor).toFixed(2)} ({frete.prazo} dias úteis)
+              Frete: R$ {Number(frete[0].price).toFixed(2)} ({frete[0].delivery_time} dias úteis)
             </div>
           )}
         </div>
@@ -243,7 +243,9 @@ const Cart = () => {
           <div className="total-row">
             <span>Frete</span>
             <span>
-              {frete ? `R$ ${Number(frete.valor).toFixed(2)}` : "--"}
+              {frete && Array.isArray(frete) && frete.length > 0
+                ? `R$ ${Number(frete[0].price).toFixed(2)}`
+                : "--"}
             </span>
           </div>
           <div className="total-row grand-total">
