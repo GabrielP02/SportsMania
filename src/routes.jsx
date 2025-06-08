@@ -9,7 +9,7 @@ import Cart from "./pages/cart/Cart";
 import { APP_ROUTES } from "./utils/constants";
 import Product from "./pages/Product";
 import AboutUs from "./pages/AboutUs";
-import Perfil from "./pages/Perfil";
+import AddressUpdate from "./pages/AddressUpdate";
 import MyOrders from './pages/MyOrders';
 import Contact from './pages/Contact';
 import Cards from './pages/Cards';
@@ -39,7 +39,7 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.CART_PAGE} element={<Cart />} />
       <Route path={`${APP_ROUTES.PRODUCT}/:id`} element={<Product />} />
       <Route path={APP_ROUTES.ABOUT_US} element={<AboutUs />} />
-      <Route path={APP_ROUTES.PERFIL} element={<Perfil />} />
+      <Route path={APP_ROUTES.ADDRESUPDATE} element={<AddressUpdate />} />
       <Route path={APP_ROUTES.MY_ORDERS} element={<MyOrders />} />
       <Route path={APP_ROUTES.CONTACT} element={<Contact />} />
       <Route path={APP_ROUTES.CARDS} element={<Cards />} />

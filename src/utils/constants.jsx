@@ -7,7 +7,7 @@ export const APP_ROUTES = {
   ADRESS: '/adress',
   PRODUCT: '/product',
   ABOUT_US: '/aboutus',
-  PERFIL: '/perfil',
+  ADRESSUPDATE: '/addressupdate',
   MY_ORDERS: '/pedidos',
   CONTACT: '/contact',
   CARDS: '/cards',
