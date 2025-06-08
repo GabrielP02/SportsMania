@@ -44,7 +44,7 @@ const Sidebar = () => {
           <ul className="space-y-3">
             <li>
               <Link to="/Perfil" className="flex justify-between text-gray-600 hover:text-black">
-                Alterar dados cadastrais <span className="text-yellow-500">{">"}</span>
+                Alterar Endereço <span className="text-yellow-500">{">"}</span>
               </Link>
             </li>
             <li>
