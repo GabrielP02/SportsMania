@@ -1,17 +1,36 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 import Navbar from "../../components/NavBar";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
-  const [cepDestino, setCepDestino] = useState("");
   const [frete, setFrete] = useState([]);
   const [servicoSelecionado, setServicoSelecionado] = useState(null);
   const [calculandoFrete, setCalculandoFrete] = useState(false);
+  const [endereco, setEndereco] = useState(null);
 
   const clienteId = localStorage.getItem("clienteId");
+  const navigate = useNavigate();
 
+  // Buscar endereço do usuário
+  useEffect(() => {
+    if (!clienteId) return;
+    const token = localStorage.getItem("token");
+    fetch(`https://sportsmaniaback.onrender.com/api/persons/${clienteId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    })
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data) setEndereco(data);
+      });
+  }, [clienteId]);
+
+  // Buscar itens do carrinho
   useEffect(() => {
     if (!clienteId) {
       alert("Faça login para visualizar o carrinho.");
@@ -43,7 +62,15 @@ const Cart = () => {
       });
   }, [clienteId]);
 
-  const handleCalcularFrete = async () => {
+  // Calcular frete automaticamente quando endereço e carrinho estiverem prontos
+  useEffect(() => {
+    if (endereco && endereco.cep && cartItems.length > 0) {
+      handleCalcularFrete(endereco.cep);
+    }
+    // eslint-disable-next-line
+  }, [endereco, cartItems]);
+
+  const handleCalcularFrete = async (cepDestino) => {
     setCalculandoFrete(true);
     try {
       const payload = {
@@ -65,8 +92,8 @@ const Cart = () => {
       });
       if (response.ok) {
         const resultado = await response.json();
-        setFrete(resultado); // resultado é um array de opções de frete
-        setServicoSelecionado(null); // reseta seleção ao recalcular
+        setFrete(resultado);
+        setServicoSelecionado(null);
       } else {
         setFrete([]);
         setServicoSelecionado(null);
@@ -81,7 +108,6 @@ const Cart = () => {
     setCalculandoFrete(false);
   };
 
-  // Calcula o total com o frete selecionado
   const precoTotal = useMemo(() => {
     if (servicoSelecionado) {
       return total + Number(servicoSelecionado.price);
@@ -142,7 +168,7 @@ const Cart = () => {
             "Content-Type": "application/json",
             ...(token && { Authorization: `Bearer ${token}` }),
           },
-          body: JSON.stringify({ quantidade: 1 }) // QuantidadeDTO
+          body: JSON.stringify({ quantidade: 1 })
         }
       );
       if (response.ok) {
@@ -178,6 +204,28 @@ const Cart = () => {
     <div>
       <Navbar />
       <div className="cart-container">
+        {/* Endereço do usuário */}
+        <div className="bg-gray-100 p-4 rounded mb-4 flex justify-between items-center">
+          <div>
+            <h2 className="font-bold mb-1">Endereço de entrega:</h2>
+            {endereco ? (
+              <div>
+                <div>{endereco.rua}, {endereco.numero} {endereco.complemento && `- ${endereco.complemento}`}</div>
+                <div>{endereco.bairro} - {endereco.cidade}/{endereco.uf}</div>
+                <div>CEP: {endereco.cep}</div>
+              </div>
+            ) : (
+              <span>Carregando endereço...</span>
+            )}
+          </div>
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded font-bold"
+            onClick={() => navigate("/addressUpdate")}
+          >
+            Atualizar endereço
+          </button>
+        </div>
+
         <div className="cart-content">
           <table className="cart-table">
             <thead>
@@ -223,28 +271,10 @@ const Cart = () => {
           </table>
         </div>
 
-        {/* Campo para calcular frete */}
+        {/* Opções de frete para o usuário escolher */}
         <div className="cart-frete">
-          <label htmlFor="cepDestino" className="block mb-2 font-bold">Calcule o frete</label>
-          <div className="flex gap-2 mb-2">
-            <input
-              id="cepDestino"
-              type="text"
-              placeholder="Digite seu CEP"
-              value={cepDestino}
-              onChange={e => setCepDestino(e.target.value)}
-              className="border rounded-md p-2"
-              maxLength={9}
-            />
-            <button
-              onClick={handleCalcularFrete}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md font-bold"
-              disabled={calculandoFrete || !cepDestino}
-            >
-              {calculandoFrete ? "Calculando..." : "Calcular"}
-            </button>
-          </div>
-          {/* Opções de frete para o usuário escolher */}
+          <label className="block mb-2 font-bold">Frete para o CEP: {endereco?.cep || "..."}</label>
+          {calculandoFrete && <div>Calculando frete...</div>}
           {frete && Array.isArray(frete) && frete.length > 0 && (
             <div className="mt-2">
               <label className="block font-bold mb-1">Escolha o serviço de entrega:</label>

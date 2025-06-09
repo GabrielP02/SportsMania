@@ -131,7 +131,6 @@ const AddressUpdate = () => {
         </form>
       </div>
 
-      <Footer/>
     </div>
   );
 };
