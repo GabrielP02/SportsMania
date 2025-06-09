@@ -39,7 +39,7 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.CART_PAGE} element={<Cart />} />
       <Route path={`${APP_ROUTES.PRODUCT}/:id`} element={<Product />} />
       <Route path={APP_ROUTES.ABOUT_US} element={<AboutUs />} />
-      <Route path={APP_ROUTES.ADDRESUPDATE} element={<AddressUpdate />} />
+      <Route path="/addressupdate" element={<AddressUpdate />} />
       <Route path={APP_ROUTES.MY_ORDERS} element={<MyOrders />} />
       <Route path={APP_ROUTES.CONTACT} element={<Contact />} />
       <Route path={APP_ROUTES.CARDS} element={<Cards />} />
