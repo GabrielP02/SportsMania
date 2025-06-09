@@ -51,7 +51,7 @@ const SignIn = () => {
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: "blur(6px)",
-          opacity: 0.25,
+        
           zIndex: 0,
         }}
       />
@@ -93,7 +93,7 @@ const SignIn = () => {
             </div>
             <button
               type="submit"
-              className="rounded-full py-3 bg-gradient-to-r from-blue-600 to-red-700 text-white font-bold text-lg tracking-wider shadow-md hover:scale-105 transition"
+              className="rounded-full py-3 bg-blue-600 text-white font-bold text-lg tracking-wider shadow-md hover:bg-blue-700 hover:scale-105 transition"
             >
               ENTRAR
             </button>
@@ -109,12 +109,15 @@ const SignIn = () => {
           </div>
         </div>
         {/* Imagem ilustrativa ao lado direito */}
-        <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-500 to-red-700 relative">
+        <div className="hidden md:flex flex-1 items-center justify-center bg-blue-600 relative">
           <img
             src={jogador1}
             alt="Soccer player illustration"
             className="object-contain max-h-[500px] max-w-[360px] drop-shadow-lg rounded-2xl"
-         
+            style={{
+              margin: "0 auto",
+              display: "block",
+            }}
           />
         </div>
       </div>

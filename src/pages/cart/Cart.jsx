@@ -203,143 +203,174 @@ const Cart = () => {
   return (
     <div>
       <Navbar />
-      <div className="cart-container">
-        {/* Endereço do usuário */}
-        <div className="bg-gray-100 p-4 rounded mb-4 flex justify-between items-center">
-          <div>
-            <h2 className="font-bold mb-1">Endereço de entrega:</h2>
+      <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto p-6">
+        {/* Lado esquerdo: Produtos */}
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold mb-6">Meu carrinho</h1>
+          <div className="bg-white rounded-lg shadow p-6 mb-6">
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
+                <div
+                  key={item.produto.id}
+                  className="flex flex-col md:flex-row md:items-center gap-4 border-b last:border-b-0 pb-4 mb-4 last:mb-0"
+                >
+                  <img
+                    src={item.produto.imagem}
+                    alt={item.produto.nome}
+                    className="w-28 h-28 object-contain rounded bg-gray-100"
+                  />
+                  <div className="flex-1">
+                    <div className="font-bold text-lg">{item.produto.nome}</div>
+                    <div className="text-gray-500 text-sm mt-1">
+                      Tamanho: {item.produto.tamanho || "--"}
+                    </div>
+                    <div className="text-gray-500 text-sm">
+                      Cor: {item.produto.cor || "--"}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 mt-2 md:mt-0">
+                    <span className="text-gray-700">Qtd:</span>
+                    <span className="px-3 py-1 border rounded bg-gray-50">{item.quantidade}</span>
+                  </div>
+                  <div className="font-bold text-lg whitespace-nowrap">
+                    R$ {(item.produto.preco || 0).toFixed(2)}
+                  </div>
+                  <button
+                    onClick={() => handleRemoveItem(item.produto.id)}
+                    className="text-red-600 font-bold text-xl hover:underline"
+                    title="Remover"
+                  >
+                    &#128465;
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-gray-500 py-8">Carrinho vazio.</div>
+            )}
+          </div>
+
+          {/* Endereço do usuário */}
+          <div className="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 className="font-bold mb-2">Endereço de entrega:</h2>
             {endereco ? (
               <div>
-                <div>{endereco.rua}, {endereco.numero} {endereco.complemento && `- ${endereco.complemento}`}</div>
-                <div>{endereco.bairro} - {endereco.cidade}/{endereco.uf}</div>
+                <div>
+                  {endereco.rua}, {endereco.numero}{" "}
+                  {endereco.complemento && `- ${endereco.complemento}`}
+                </div>
+                <div>
+                  {endereco.bairro} - {endereco.cidade}/{endereco.uf}
+                </div>
                 <div>CEP: {endereco.cep}</div>
               </div>
             ) : (
               <span>Carregando endereço...</span>
             )}
+            <button
+              className="ml-4 mt-2 bg-[#185cfc] text-white px-4 py-2 rounded font-bold"
+              onClick={() => navigate("/addressUpdate")}
+            >
+              Atualizar endereço
+            </button>
           </div>
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded font-bold"
-            onClick={() => navigate("/addressUpdate")}
-          >
-            Atualizar endereço
-          </button>
-        </div>
 
-        <div className="cart-content">
-          <table className="cart-table">
-            <thead>
-              <tr>
-                <th>Produtos</th>
-                <th>Quantidade</th>
-                <th>Valor unitário</th>
-                <th>Valor total</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.length > 0 ? (
-                cartItems.map((item) => (
-                  <tr key={item.produto.id}>
-                    <td>
-                      <div className="flex items-center gap-2">
-                        <img src={item.produto.imagem} alt={item.produto.nome} className="cart-img" />
-                        {item.produto.nome}
-                      </div>
-                    </td>
-                    <td>{item.quantidade}</td>
-                    <td>R$ {(item.produto.preco || 0).toFixed(2)}</td>
-                    <td>R$ {((item.produto.preco || 0) * (item.quantidade || 1)).toFixed(2)}</td>
-                    <td>
-                      <button
-                        onClick={() => handleRemoveItem(item.produto.id)}
-                        className="text-red-600 font-bold hover:underline"
-                      >
-                        ❌
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="text-center text-gray-500">
-                    Carrinho vazio.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Opções de frete para o usuário escolher */}
-        <div className="cart-frete">
-          <label className="block mb-2 font-bold">Frete para o CEP: {endereco?.cep || "..."}</label>
-          {calculandoFrete && <div>Calculando frete...</div>}
-          {frete && Array.isArray(frete) && frete.length > 0 && (
-            <div className="mt-2">
-              <label className="block font-bold mb-1">Escolha o serviço de entrega:</label>
-              {frete
-                .filter(
-                  opcao =>
-                    (opcao.id === "1" || opcao.id === "2" || opcao.id === 1 || opcao.id === 2) &&
+          {/* Frete */}
+          <div className="bg-white rounded-lg shadow p-6 mb-6">
+            <label className="block mb-2 font-bold">
+              Consultar frete e prazo de entrega
+            </label>
+            <div className="mb-2">
+              <span className="font-semibold">CEP: </span>
+              {endereco?.cep || "..."}
+            </div>
+            {calculandoFrete && <div>Calculando frete...</div>}
+            {frete && Array.isArray(frete) && frete.length > 0 && (
+              <div className="mt-2">
+                <label className="block font-bold mb-1">
+                  Escolha o serviço de entrega:
+                </label>
+                {frete
+                  .filter(
+                    (opcao) =>
+                      (opcao.id === "1" ||
+                        opcao.id === "2" ||
+                        opcao.id === 1 ||
+                        opcao.id === 2) &&
+                      opcao.price &&
+                      !isNaN(Number(opcao.price))
+                  )
+                  .map((opcao, idx) => (
+                    <div key={idx} className="flex items-center gap-2 mb-1">
+                      <input
+                        type="radio"
+                        name="servico-frete"
+                        value={opcao.id}
+                        checked={
+                          servicoSelecionado &&
+                          servicoSelecionado.id === opcao.id
+                        }
+                        onChange={() => setServicoSelecionado(opcao)}
+                      />
+                      <span>
+                        {opcao.name} - R$ {Number(opcao.price).toFixed(2)} (
+                        {opcao.delivery_time} dias úteis)
+                      </span>
+                    </div>
+                  ))}
+                {frete.filter(
+                  (opcao) =>
+                    (opcao.id === "1" ||
+                      opcao.id === "2" ||
+                      opcao.id === 1 ||
+                      opcao.id === 2) &&
                     opcao.price &&
                     !isNaN(Number(opcao.price))
-                )
-                .map((opcao, idx) => (
-                  <div key={idx} className="flex items-center gap-2 mb-1">
-                    <input
-                      type="radio"
-                      name="servico-frete"
-                      value={opcao.id}
-                      checked={servicoSelecionado && servicoSelecionado.id === opcao.id}
-                      onChange={() => setServicoSelecionado(opcao)}
-                    />
-                    <span>
-                      {opcao.name} - R$ {Number(opcao.price).toFixed(2)} ({opcao.delivery_time} dias úteis)
-                    </span>
+                ).length === 0 && (
+                  <div className="text-red-600 font-bold mt-2">
+                    Nenhuma opção de frete disponível para o CEP informado.
                   </div>
-                ))}
-              {/* Mensagem caso nenhuma opção válida */}
-              {frete.filter(
-                opcao =>
-                  (opcao.id === "1" || opcao.id === "2" || opcao.id === 1 || opcao.id === 2) &&
-                  opcao.price &&
-                  !isNaN(Number(opcao.price))
-              ).length === 0 && (
-                <div className="text-red-600 font-bold mt-2">
-                  Nenhuma opção de frete disponível para o CEP informado.
-                </div>
-              )}
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Lado direito: Resumo da compra */}
+        <div className="w-full md:w-[340px]">
+          <div className="bg-white rounded-lg shadow p-6 sticky top-8">
+            <h2 className="text-xl font-bold mb-4">Resumo da compra</h2>
+            <div className="flex justify-between mb-2">
+              <span className="font-semibold">Subtotal ({cartItems.length} item{cartItems.length !== 1 ? "s" : ""})</span>
+              <span>R$ {total.toFixed(2)}</span>
             </div>
-          )}
+            <div className="flex justify-between mb-2">
+              <span className="font-semibold">Frete</span>
+              <span>
+                {servicoSelecionado
+                  ? `R$ ${Number(servicoSelecionado.price).toFixed(2)}`
+                  : "--"}
+              </span>
+            </div>
+            <hr className="my-4" />
+            <div className="flex justify-between items-center mb-6">
+              <span className="font-bold text-lg">Valor total</span>
+              <span className="font-bold text-lg">
+                R$ {precoTotal.toFixed(2)}
+              </span>
+            </div>
+            <button
+              className="w-full py-3 rounded font-bold text-white text-lg transition"
+              style={{
+                background: "#185cfc",
+                boxShadow: "0 2px 8px 0 #185cfc40",
+              }}
+              onClick={handlePagamento}
+              disabled={cartItems.length === 0}
+            >
+              Finalizar compra
+            </button>
+          </div>
         </div>
-
-        <div className="cart-summary">
-          <div className="total-row">
-            <span>Subtotal</span>
-            <span>R$ {total.toFixed(2)}</span>
-          </div>
-          <div className="total-row">
-            <span>Frete</span>
-            <span>
-              {servicoSelecionado
-                ? `R$ ${Number(servicoSelecionado.price).toFixed(2)}`
-                : "--"}
-            </span>
-          </div>
-          <div className="total-row grand-total">
-            <span>Total da compra</span>
-            <span>R$ {precoTotal.toFixed(2)}</span>
-          </div>
-        </div>
-
-        <button
-          className="continue-btn"
-          onClick={handlePagamento}
-          disabled={cartItems.length === 0}
-        >
-          Pagar com Mercado Pago
-        </button>
       </div>
     </div>
   );

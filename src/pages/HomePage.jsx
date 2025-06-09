@@ -10,6 +10,7 @@ import { APP_ROUTES } from "../utils/constants";
 import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
 
+
 const ProductCard = ({ id, nome, preco, imagem }) => {
   const navigate = useNavigate();
 
@@ -78,6 +79,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       <Navbar/>
+      
       <div className="w-full p-4 mx-auto">
         {/* Categorias */}
         <div className="flex flex-row items-center justify-between mb-8">
@@ -143,12 +145,33 @@ const HomePage = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <img
-                src={banner2}
-                alt="Banner 2"
-                className="w-full h-full object-cover"
-                style={{ width: "100%", height: "100%" }}
-              />
+              <div className="relative w-full h-full">
+                <img
+                  src={banner2}
+                  alt="Banner 2"
+                  className="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+                {/* Mensagem lateral para o banner 2 */}
+                <div
+                  className="absolute left-12 top-1/2 -translate-y-1/2 text-white"
+                  style={{
+                    maxWidth: "400px",
+                    background: "rgba(0,0,0,0.35)",
+                    padding: "32px 32px 32px 32px",
+                    borderRadius: "12px"
+                  }}
+                >
+                  <h2 className="text-4xl font-bold mb-4">Encontre os melhores produtos esportivos</h2>
+                  <div className="h-1 w-24 bg-red-600 mb-4"></div>
+                  <button
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded transition"
+                    onClick={() => navigate(APP_ROUTES.TODOS)}
+                  >
+                    VER PRODUTOS
+                  </button>
+                </div>
+              </div>
             </SwiperSlide>
           </Swiper>
         </div>
