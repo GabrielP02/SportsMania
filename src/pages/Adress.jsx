@@ -22,35 +22,7 @@ const Adress = () => {
           Conheça a nossa loja
         </h1>
 
-        {/* Descrição adicional */}
-        <div className="mt-4 mb-8">
-          <p className="text-lg text-blue-700 font-semibold">
-            Sua loja esportiva no coração da cidade! Desfrute da conveniência e
-            acessibilidade de nossa localização privilegiada.
-          </p>
-        </div>
-
-        {/* Horário de Funcionamento */}
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-2 text-blue-600">
-            Horário de Funcionamento
-          </h3>
-          <ul className="text-gray-700 ml-2">
-            <li>Seg-Sex: 9h às 18h</li>
-            <li>Sábado: 9h às 14h</li>
-            <li>Domingo: Fechado</li>
-          </ul>
-        </div>
-
-        {/* Complemento sobre localização */}
-        <div className="mb-8">
-          <p className="text-gray-700">
-            Nossa localização facilita o acesso aos recursos e serviços essenciais
-            para uma experiência esportiva completa.
-          </p>
-        </div>
-
-        {/* Bloco principal */}
+        {/* Imagem + Descrição ao lado */}
         <div className="flex flex-col md:flex-row gap-8 mt-6 items-center">
           {/* Imagem da loja */}
           <div className="border-2 border-blue-400 p-1 bg-white">
@@ -60,8 +32,12 @@ const Adress = () => {
               className="w-[350px] md:w-[400px] h-auto object-cover"
             />
           </div>
-          {/* Texto de boas-vindas */}
+          {/* Descrição adicional ao lado da foto */}
           <div className="flex-1">
+            <p className="text-lg text-blue-700 font-semibold mb-6">
+              Sua loja esportiva no coração da cidade! Desfrute da conveniência e
+              acessibilidade de nossa localização privilegiada.
+            </p>
             <h2 className="text-2xl md:text-3xl text-blue-600 font-bold mb-2">
               Venha nos fazer uma visita! Ficaremos felizes em atendê-lo.
             </h2>
@@ -76,32 +52,58 @@ const Adress = () => {
           </div>
         </div>
 
-        {/* Localização */}
-        <div className="mt-10">
-          <h3 className="text-xl font-semibold mb-2 border-b border-gray-300 w-fit">
-            Onde estamos localizados
-          </h3>
-          <div className="bg-gray-100 rounded-lg p-4 flex items-center gap-2 w-fit">
-            <span className="text-xl text-gray-600">📍</span>
-            <span className="text-gray-700">
-              Rua Aurora, nº 369 – Jardim Perola, Birigui – SP
-            </span>
+        {/* Localização + mapa + textos ao lado */}
+        <div className="mt-10 flex flex-col md:flex-row gap-8 items-start">
+          {/* Mapa */}
+          <div className="flex-shrink-0">
+            <div id="map_canvas" style={{ width: 400, height: 350 }}>
+              <gmp-map
+                center="-8.022706985473633,-34.91827392578125"
+                zoom="17"
+                map-id="DEMO_MAP_ID"
+                style={{ width: "100%", height: "100%" }}
+              >
+                <gmp-advanced-marker
+                  position="-8.022706985473633,-34.91827392578125"
+                  title="Nossa loja"
+                ></gmp-advanced-marker>
+              </gmp-map>
+            </div>
+            {/* Endereço abaixo do mapa em telas pequenas */}
+            <div className="md:hidden mt-4 bg-gray-100 rounded-lg p-4 flex items-center gap-2 w-fit">
+              <span className="text-xl text-gray-600">📍</span>
+              <span className="text-gray-700">
+                Rua Aurora, nº 369 – Jardim Perola, Birigui – SP
+              </span>
+            </div>
           </div>
-        </div>
-
-        {/* Mapa */}
-        <div className="mt-10 flex justify-center">
-          <div id="map_canvas" style={{ width: 700, height: 400 }}>
-            <gmp-map
-              center="-8.022706985473633,-34.91827392578125"
-              zoom="17"
-              map-id="DEMO_MAP_ID"
-            >
-              <gmp-advanced-marker
-                position="-8.022706985473633,-34.91827392578125"
-                title="Nossa loja"
-              ></gmp-advanced-marker>
-            </gmp-map>
+          {/* Textos ao lado do mapa */}
+          <div className="flex-1">
+            {/* Endereço em telas médias+ */}
+            <div className="hidden md:flex bg-gray-100 rounded-lg p-4 items-center gap-2 w-fit mb-6">
+              <span className="text-xl text-gray-600">📍</span>
+              <span className="text-gray-700">
+                Rua Aurora, nº 369 – Jardim Perola, Birigui – SP
+              </span>
+            </div>
+            {/* Horário de Funcionamento */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-2 text-blue-600">
+                Horário de Funcionamento
+              </h3>
+              <ul className="text-gray-700 ml-2">
+                <li>Seg-Sex: 9h às 18h</li>
+                <li>Sábado: 9h às 14h</li>
+                <li>Domingo: Fechado</li>
+              </ul>
+            </div>
+            {/* Complemento sobre localização */}
+            <div className="mb-8">
+              <p className="text-gray-700">
+                Nossa localização facilita o acesso aos recursos e serviços
+                essenciais para uma experiência esportiva completa.
+              </p>
+            </div>
           </div>
         </div>
       </div>
