@@ -76,7 +76,7 @@ const ProductPage = () => {
             <p className="text-gray-600">
               Ou 10x{" "}
               <span className="font-bold">
-                R$ {(product.preco / 10).toFixed(2)}
+                R$ {(product.preco / 10*0.2066).toFixed(2)}
               </span>{" "}
               sem juros
             </p>

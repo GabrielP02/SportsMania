@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,6 +9,7 @@ import imagemIndisponivel from "../assets/imagemIndisponivel.png";
 import { APP_ROUTES } from "../utils/constants";
 import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Importa ícones das setas
 
 
 const ProductCard = ({ id, nome, preco, imagem }) => {
@@ -47,6 +48,7 @@ const HomePage = () => {
   const [busca, setBusca] = useState("");
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("Todos");
   const navigate = useNavigate();
+  const swiperRef = useRef(null);
 
   useEffect(() => {
     fetch("https://sportsmaniaback.onrender.com/api/produtos/find/all")
@@ -102,17 +104,36 @@ const HomePage = () => {
           </div>
         </div>
         {/* Carrossel de imagens */}
-        <div className="mb-8 flex justify-center bg-[#f5f5f5]">
+        <div className="mb-8 flex justify-center bg-[#f5f5f5] relative">
+          {/* Seta esquerda */}
+          <button
+            className="absolute left-2 top-1/2 z-10 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow"
+            onClick={() => swiperRef.current?.slidePrev()}
+            style={{ outline: "none", border: "none" }}
+            aria-label="Anterior"
+          >
+            <FaChevronLeft size={24} color="#185cfc" />
+          </button>
+          {/* Seta direita */}
+          <button
+            className="absolute right-2 top-1/2 z-10 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow"
+            onClick={() => swiperRef.current?.slideNext()}
+            style={{ outline: "none", border: "none" }}
+            aria-label="Próximo"
+          >
+            <FaChevronRight size={24} color="#185cfc" />
+          </button>
           <Swiper
             slidesPerView={1}
             pagination={{ clickable: true }}
             modules={[Pagination]}
             className="overflow-hidden"
             style={{
-              width: "2000px", // largura ajustada
-              height: "900px", // altura ajustada
+              width: "2000px",
+              height: "900px",
               borderRadius: "0px"
             }}
+            onSwiper={(swiper) => { swiperRef.current = swiper; }}
           >
             <SwiperSlide>
               <div className="relative w-full h-full">
@@ -175,8 +196,6 @@ const HomePage = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-
-       
       </div>
     </div>
   );
