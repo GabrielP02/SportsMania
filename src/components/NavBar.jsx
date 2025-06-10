@@ -144,24 +144,23 @@ const Navbar = () => {
                 </div>
 
                 {/* Carrinho */}
-                <div className="cart-container" style={{ position: "relative" }} onClick={() => navigate("/cart")}>
+                <div className="cart-container" style={{ position: "relative", display: "flex", alignItems: "center" }} onClick={() => navigate("/cart")}>
                     <FaShoppingCart className="cart-icon cursor-pointer" size={24} color="#fff" />
                     {totalItems > 0 && (
                         <span
                             className="cart-badge"
                             style={{
-                                position: "absolute",
-                                top: "-8px",
-                                right: "-8px",
+                                marginLeft: "6px",
                                 background: "#ff0",
                                 color: "#222",
                                 borderRadius: "50%",
-                                fontSize: "0.85rem",
+                                fontSize: "0.95rem",
                                 fontWeight: "bold",
-                                padding: "2px 7px",
+                                padding: "2px 8px",
                                 minWidth: "22px",
                                 textAlign: "center",
-                                border: "2px solid #185cfc"
+                                border: "2px solid #185cfc",
+                                position: "static"
                             }}
                         >
                             {totalItems}
