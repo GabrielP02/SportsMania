@@ -61,7 +61,7 @@ const Luta = () => {
 
     <div className="p-8">
         
-      {/* Barra de categorias e busca */}
+      {/* Barra de categorias */}
       <div className="flex flex-row items-center justify-between mb-8">
         <div className="flex-1 flex justify-center">
           <div className="flex flex-row gap-8">
@@ -80,25 +80,7 @@ const Luta = () => {
             ))}
           </div>
         </div>
-        <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 ml-4 w-full max-w-xs">
-          <svg
-            className="w-4 h-4 text-gray-400 mr-2"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Buscar"
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-            className="bg-transparent outline-none w-full"
-          />
-        </div>
+        {/* Barra de busca removida daqui */}
       </div>
       {/* Produtos */}
       <h1 className="text-2xl font-bold mb-4">Luta</h1>
