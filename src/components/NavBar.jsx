@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './navbar.css';
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
@@ -24,9 +24,22 @@ const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
     const [search, setSearch] = useState("");
     const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const [userName, setUserName] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const { totalItems } = useCart();
+
+    // Recupera o nome do usuário do localStorage ao montar
+    useEffect(() => {
+        const nomeCompleto = localStorage.getItem("clienteNome") || "";
+        if (nomeCompleto) {
+            // Pega apenas o primeiro nome
+            const primeiroNome = nomeCompleto.split(" ")[0];
+            setUserName(primeiroNome);
+        } else {
+            setUserName("");
+        }
+    }, [location.pathname]); // Atualiza ao trocar de rota
 
     // Busca produto na API e redireciona para a categoria correta mostrando só o produto pesquisado
     async function handleSearch(e) {
@@ -152,7 +165,11 @@ const Navbar = () => {
                     onBlur={() => setTimeout(() => setUserMenuOpen(false), 150)}
                 >
                     <FaUser size={22} />
-                    <span>Entrar</span>
+                    <span>
+                        {userName
+                            ? `Olá ${userName}`
+                            : "Entrar"}
+                    </span>
                     <FiChevronDown size={18} />
                     {userMenuOpen && (
                         <div
@@ -176,7 +193,7 @@ const Navbar = () => {
                             >
                                 Login
                             </div>
-                             <div
+                            <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
                                 onClick={() => { navigate("/dados"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
@@ -197,7 +214,6 @@ const Navbar = () => {
                             >
                                 Alterar Endereço
                             </div>
-                            
                         </div>
                     )}
                 </div>
