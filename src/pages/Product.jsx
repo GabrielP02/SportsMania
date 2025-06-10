@@ -184,7 +184,16 @@ const ProductPage = () => {
             </span>
           </div>
 
-        
+          {/* Botão de comprar e adicionar ao carrinho */}
+          <div className="flex flex-col gap-4 mt-4">
+         
+            <button
+              onClick={handleAddToCart}
+              className="w-full bg-blue-700 text-white py-4 rounded-md font-bold hover:bg-blue-800 transition"
+            >
+              Adicionar ao carrinho
+            </button>
+          </div>
         </div>
       </div>
     </div>
