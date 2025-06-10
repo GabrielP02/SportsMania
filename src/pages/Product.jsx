@@ -7,7 +7,6 @@ const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState("");
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -38,10 +37,6 @@ const ProductPage = () => {
       alert("Faça login para adicionar ao carrinho.");
       return;
     }
-    if (!selectedSize) {
-      alert("Selecione um tamanho.");
-      return;
-    }
 
     try {
       const response = await fetch(
@@ -69,9 +64,6 @@ const ProductPage = () => {
   if (!product) {
     return <p>Carregando...</p>;
   }
-
-  // Tamanhos disponíveis (exemplo)
-  const tamanhos = ["34", "35", "36", "38", "39", "40", "41", "42", "43"];
 
   return (
     <div>
@@ -158,7 +150,7 @@ const ProductPage = () => {
 
           {/* Botão de comprar e adicionar ao carrinho */}
           <div className="flex flex-col gap-4 mt-4">
-            
+         
             <button
               onClick={handleAddToCart}
               className="w-full bg-blue-700 text-white py-4 rounded-md font-bold hover:bg-blue-800 transition"
