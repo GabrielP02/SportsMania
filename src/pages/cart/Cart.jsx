@@ -270,7 +270,7 @@ const Cart = () => {
               className="ml-4 mt-2 bg-[#185cfc] text-white px-4 py-2 rounded font-bold"
               onClick={() => navigate("/addressUpdate")}
             >
-              Atualizar endereço
+              Escolher endereço
             </button>
           </div>
 

@@ -173,6 +173,13 @@ const Navbar = () => {
                             >
                                 Login
                             </div>
+                             <div
+                                style={{ padding: "10px 18px", cursor: "pointer" }}
+                                onClick={() => { navigate(APP_ROUTES.SIGN_IN); setUserMenuOpen(false); }}
+                                onMouseDown={e => e.preventDefault()}
+                            >
+                                Minha conta
+                            </div>
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
                                 onClick={() => { navigate("/orders"); setUserMenuOpen(false); }}
@@ -182,11 +189,12 @@ const Navbar = () => {
                             </div>
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
-                                onClick={() => { navigate("/addresses"); setUserMenuOpen(false); }}
+                                onClick={() => { navigate("/addressUpdate"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
                                 Endereços
                             </div>
+                            
                         </div>
                     )}
                 </div>
