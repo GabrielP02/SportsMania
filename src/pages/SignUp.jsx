@@ -69,7 +69,7 @@ const SignUp = () => {
           <form onSubmit={handleRegister} className="flex flex-col gap-6">
             <input
               type="text"
-              placeholder="Nome de usuário"
+              placeholder="Nome Completo"
               className="rounded-full px-6 py-3 border border-gray-300 focus:outline-none focus:ring-2 text-lg"
               style={{ focus: { borderColor: "#b81414" } }}
               value={nome}

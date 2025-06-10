@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './navbar.css';
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
@@ -24,9 +24,22 @@ const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
     const [search, setSearch] = useState("");
     const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const [userName, setUserName] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const { totalItems } = useCart();
+
+    // Recupera o nome do usuário do localStorage ao montar
+    useEffect(() => {
+        const nomeCompleto = localStorage.getItem("clienteNome") || "";
+        if (nomeCompleto) {
+            // Pega apenas o primeiro nome
+            const primeiroNome = nomeCompleto.split(" ")[0];
+            setUserName(primeiroNome);
+        } else {
+            setUserName("");
+        }
+    }, [location.pathname]); // Atualiza ao trocar de rota
 
     // Busca produto na API e redireciona para a categoria correta mostrando só o produto pesquisado
     async function handleSearch(e) {
@@ -132,7 +145,10 @@ const Navbar = () => {
             </form>
 
             {/* Ícones e menus à direita */}
-            <div className="right-section" style={{ display: "flex", alignItems: "center", gap: "32px", position: "relative" }}>
+            <div
+                className="right-section"
+                style={{ display: "flex", alignItems: "center", gap: "32px", position: "relative" }}
+            >
                 {/* Loja Física */}
                 <div
                     style={{ display: "flex", alignItems: "center", color: "#fff", cursor: "pointer", fontWeight: 600 }}
@@ -149,7 +165,11 @@ const Navbar = () => {
                     onBlur={() => setTimeout(() => setUserMenuOpen(false), 150)}
                 >
                     <FaUser size={22} />
-                    <span>Entrar</span>
+                    <span>
+                        {userName
+                            ? `Olá ${userName}`
+                            : "Entrar"}
+                    </span>
                     <FiChevronDown size={18} />
                     {userMenuOpen && (
                         <div
@@ -175,17 +195,24 @@ const Navbar = () => {
                             </div>
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
-                                onClick={() => { navigate("/orders"); setUserMenuOpen(false); }}
+                                onClick={() => { navigate("/dados"); setUserMenuOpen(false); }}
+                                onMouseDown={e => e.preventDefault()}
+                            >
+                                Minha conta
+                            </div>
+                            <div
+                                style={{ padding: "10px 18px", cursor: "pointer" }}
+                                onClick={() => { navigate("/MyOrders"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
                                 Meus Pedidos
                             </div>
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
-                                onClick={() => { navigate("/addresses"); setUserMenuOpen(false); }}
+                                onClick={() => { navigate("/addressUpdate"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
-                                Endereços
+                                Alterar Endereço
                             </div>
                         </div>
                     )}
