@@ -48,7 +48,7 @@ const faqData = [
     pergunta: "Como comprar na SportsMania?",
     resposta: (
       <span>
-        {/* Sua resposta aqui */}
+        {"Para comprar na SportsMania, basta navegar pelas categorias ou usar a barra de busca para encontrar o produto desejado e também na nossa loja fisíca localizada na Rua Pedro Allain, 81 - Loja:5 - Casa Amarela, Recife - PE, 52070-210"}
       </span>
     ),
   },
@@ -56,7 +56,7 @@ const faqData = [
     pergunta: "Quais formas de pagamento são aceitas?",
     resposta: (
       <span>
-        {/* Sua resposta aqui */}
+        {"Na SportsMania, aceitamos diversas formas de pagamento, incluindo cartões de crédito, PIX. Já na loja fisica aceitamos dinheiro, cartões de crédito, débito e pix."}
       </span>
     ),
   },
@@ -64,23 +64,16 @@ const faqData = [
     pergunta: "Como funciona a entrega dos produtos?",
     resposta: (
       <span>
-        {/* Sua resposta aqui */}
+        {"Os produtos são entregues em todo o Brasil através dos correios. O prazo de entrega varia de acordo com a localização e a forma de envio escolhida no momento da compra."}
       </span>
     ),
   },
-  {
-    pergunta: "Os produtos têm garantia?",
-    resposta: (
-      <span>
-        {/* Sua resposta aqui */}
-      </span>
-    ),
-  },
+
   {
     pergunta: "Como faço para trocar ou devolver um produto?",
     resposta: (
       <span>
-        {/* Sua resposta aqui */}
+        {"Para trocar ou devolver um produto, você deve entrar em contato com nosso atendimento ao cliente seja nas redes sociais ou pelo whatssapp, e na loja fisica você pode ir diretamente ao balcão de atendimento."}
       </span>
     ),
   },
@@ -88,7 +81,7 @@ const faqData = [
     pergunta: "Como falar com o atendimento da SportsMania?",
     resposta: (
       <span>
-        {/* Sua resposta aqui */}
+        { "Você pode entrar em contato com nosso atendimento através das redes sociais, pelo WhatsApp ou diretamente na loja física. Estamos sempre prontos para ajudar!"}
       </span>
     ),
   },
