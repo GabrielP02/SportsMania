@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/NavBar";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState("");
-  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
     fetch(`https://sportsmaniaback.onrender.com/api/produtos/find/id/${id}`)
@@ -24,22 +21,11 @@ const ProductPage = () => {
       .catch((error) => console.error("Erro ao buscar produto:", error));
   }, [id]);
 
-  // Simulação de múltiplas imagens (adicione mais URLs se houver)
-  const images = product?.imagens?.length
-    ? product.imagens
-    : product
-    ? [product.imagem]
-    : [];
-
   const handleAddToCart = async () => {
     const personId = localStorage.getItem("clienteId");
     const token = localStorage.getItem("token");
     if (!personId || !token) {
       alert("Faça login para adicionar ao carrinho.");
-      return;
-    }
-    if (!selectedSize) {
-      alert("Selecione um tamanho.");
       return;
     }
 
@@ -70,68 +56,33 @@ const ProductPage = () => {
     return <p>Carregando...</p>;
   }
 
-  // Tamanhos disponíveis (exemplo)
-  const tamanhos = ["34", "35", "36", "38", "39", "40", "41", "42", "43"];
-
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col md:flex-row max-w-7xl mx-auto p-6 font-sans gap-8">
-        {/* Galeria de imagens */}
-        <div className="md:w-2/5 lg:w-2/5 flex flex-col gap-4">
-          <div className="relative w-full aspect-square bg-gray-100 rounded-xl flex items-center justify-center">
-            {images.length > 1 && (
-              <>
-                <button
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow"
-                  onClick={() => setCurrentImage((prev) => (prev - 1 + images.length) % images.length)}
-                  aria-label="Anterior"
-                >
-                  <FaChevronLeft size={22} color="#185cfc" />
-                </button>
-                <button
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow"
-                  onClick={() => setCurrentImage((prev) => (prev + 1) % images.length)}
-                  aria-label="Próximo"
-                >
-                  <FaChevronRight size={22} color="#185cfc" />
-                </button>
-              </>
-            )}
-            <img
-              src={images[currentImage]}
-              alt={product.nome}
-              className="w-full h-full object-contain rounded-xl"
-            />
-          </div>
-          {/* Miniaturas */}
-          <div className="grid grid-cols-4 gap-2 mt-2">
-            {images.map((img, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentImage(idx)}
-                className={`border rounded-lg p-1 ${currentImage === idx ? "border-blue-600" : "border-gray-200"}`}
-                style={{ background: "#fff" }}
-              >
-                <img src={img} alt={`Miniatura ${idx + 1}`} className="h-16 w-full object-contain" />
-              </button>
-            ))}
-          </div>
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto p-6 font-sans gap-8">
+        <div className="md:w-2/5 lg:w-2/5 flex justify-center items-start sticky top-6">
+          <img
+            src={product.imagem}
+            alt={product.nome}
+            className="w-full max-w-md object-contain rounded-lg shadow-lg"
+          />
         </div>
 
-        {/* Detalhes do produto */}
         <div className="md:w-3/5 lg:w-3/5">
-          {/* Breadcrumbs */}
-          <div className="text-sm text-gray-500 mb-2">
-            <span className="hover:underline cursor-pointer">Calçados</span> &nbsp;/&nbsp;
-            <span className="hover:underline cursor-pointer">{product.categoria || "Categoria"}</span> &nbsp;/&nbsp;
-            <span className="font-semibold">{product.nome}</span>
-          </div>
-
           <h1 className="text-3xl font-bold mb-2">{product.nome}</h1>
 
           <div className="mb-6">
-            <p className="text-2xl font-bold text-blue-700">R$ {product.preco.toFixed(2)}</p>
+            <p className="text-2xl font-bold">R$ {product.preco.toFixed(2)}</p>
+            <p className="text-gray-600">
+              Ou 10x{" "}
+              <span className="font-bold">
+                R$ {(product.preco / 10*0.2066).toFixed(2)}
+              </span>{" "}
+              sem juros
+            </p>
+            <p className="text-blue-600 text-sm cursor-pointer hover:underline">
+              Ver outras opções
+            </p>
           </div>
 
           <div className="mb-6 border-b pb-6">
@@ -140,27 +91,18 @@ const ProductPage = () => {
             </p>
           </div>
 
-          {/* Cor do produto */}
-          <div className="mb-6">
-            <span className="font-semibold">Cor do produto:</span>{" "}
-            <span className="inline-block align-middle ml-2 border border-blue-600 rounded p-1">
-              <img src={images[0]} alt="Cor" className="h-8 w-8 object-contain" />
-            </span>
-          </div>
-
-          {/* Tamanhos */}
-          <div className="mb-6">
-            <span className="font-semibold block mb-2">Tamanho do produto:</span>
-            <div className="flex flex-wrap gap-2">
-              {tamanhos.map((size) => (
+          <div className="mb-6 border-b pb-6">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-xl font-bold">Tamanhos</h2>
+              <p className="text-blue-600 text-sm cursor-pointer hover:underline">
+                Guia de tamanhos
+              </p>
+            </div>
+            <div className="grid grid-cols-5 gap-2 mb-4">
+              {["2XS", "P", "M", "G", "GG"].map((size) => (
                 <button
                   key={size}
-                  className={`py-2 px-4 border rounded-md text-center font-semibold transition ${
-                    selectedSize === size
-                      ? "border-blue-700 bg-blue-100 text-blue-700"
-                      : "border-gray-300 bg-white text-gray-700 hover:border-blue-400"
-                  }`}
-                  onClick={() => setSelectedSize(size)}
+                  className="py-2 border rounded-md text-center hover:border-black"
                 >
                   {size}
                 </button>
@@ -168,7 +110,6 @@ const ProductPage = () => {
             </div>
           </div>
 
-          {/* Quantidade */}
           <div className="mb-6">
             <label className="block font-bold mb-2">Quantidade</label>
             <input
@@ -184,24 +125,13 @@ const ProductPage = () => {
             </span>
           </div>
 
-          {/* Botão de comprar e adicionar ao carrinho */}
-          <div className="flex flex-col gap-4 mt-4">
-            <button
-              className="w-full bg-blue-600 text-white py-4 rounded-md font-bold hover:bg-blue-700 transition"
-              onClick={() => {
-                // Aqui você pode redirecionar para o checkout ou página de compra direta
-                alert("Funcionalidade de compra direta ainda não implementada.");
-              }}
-            >
-              Comprar
-            </button>
-            <button
-              onClick={handleAddToCart}
-              className="w-full bg-blue-700 text-white py-4 rounded-md font-bold hover:bg-blue-800 transition"
-            >
-              Adicionar ao carrinho
-            </button>
-          </div>
+          {/* Botão de adicionar ao carrinho */}
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-black text-white py-4 rounded-md font-bold hover:bg-gray-800 transition"
+          >
+            ADICIONAR AO CARRINHO
+          </button>
         </div>
       </div>
     </div>
