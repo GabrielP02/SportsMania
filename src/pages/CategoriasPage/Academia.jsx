@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../utils/constants";
-import Navbar from "../../components/NavBar"; // Adicionado
+import Navbar from "../../components/NavBar";
 
 const categorias = [
   { nome: "Natação", rota: APP_ROUTES.NATACAO },
@@ -15,11 +15,11 @@ const categorias = [
   { nome: "Todos", rota: APP_ROUTES.TODOS }
 ];
 
-const ProductCard = ({ id, nome, preco, imagem }) => {
+const ProductCard = ({ id, nome, preco, imagem, descricao }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="border p-4 rounded-lg text-center shadow-md cursor-pointer hover:shadow-lg transition"
+      className="border p-4 rounded-lg text-center shadow-md cursor-pointer hover:shadow-lg transition flex flex-col"
       onClick={() => navigate(`/product/${id}`)}
     >
       <img
@@ -27,8 +27,9 @@ const ProductCard = ({ id, nome, preco, imagem }) => {
         alt={nome}
         className="w-24 h-24 object-contain mx-auto mb-2"
       />
-      <h3 className="font-medium">{nome}</h3>
-      <p className="text-lg font-bold">R$ {preco.toFixed(2)}</p>
+      <h3 className="font-medium mb-1">{nome}</h3>
+      <p className="text-gray-600 text-sm mb-2 line-clamp-3">{descricao}</p>
+      <p className="text-lg font-bold mt-auto">R$ {preco.toFixed(2)}</p>
     </div>
   );
 };
