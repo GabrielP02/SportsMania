@@ -52,7 +52,7 @@ const MyData = () => {
       icon: <FaSignOutAlt className="mr-2" />,
       onClick: () => {
         localStorage.clear();
-        navigate(APP_ROUTES.SIGN_IN);
+        navigate("/signin"); // Altere para o caminho correto da página de login
       },
       active: false,
     },
