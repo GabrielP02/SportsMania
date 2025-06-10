@@ -140,34 +140,6 @@ const ProductPage = () => {
             </p>
           </div>
 
-          {/* Cor do produto */}
-          <div className="mb-6">
-            <span className="font-semibold">Cor do produto:</span>{" "}
-            <span className="inline-block align-middle ml-2 border border-blue-600 rounded p-1">
-              <img src={images[0]} alt="Cor" className="h-8 w-8 object-contain" />
-            </span>
-          </div>
-
-          {/* Tamanhos */}
-          <div className="mb-6">
-            <span className="font-semibold block mb-2">Tamanho do produto:</span>
-            <div className="flex flex-wrap gap-2">
-              {tamanhos.map((size) => (
-                <button
-                  key={size}
-                  className={`py-2 px-4 border rounded-md text-center font-semibold transition ${
-                    selectedSize === size
-                      ? "border-blue-700 bg-blue-100 text-blue-700"
-                      : "border-gray-300 bg-white text-gray-700 hover:border-blue-400"
-                  }`}
-                  onClick={() => setSelectedSize(size)}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Quantidade */}
           <div className="mb-6">
             <label className="block font-bold mb-2">Quantidade</label>
@@ -186,7 +158,14 @@ const ProductPage = () => {
 
           {/* Botão de comprar e adicionar ao carrinho */}
           <div className="flex flex-col gap-4 mt-4">
-         
+            <button
+              className="w-full bg-blue-600 text-white py-4 rounded-md font-bold hover:bg-blue-700 transition"
+              onClick={() => {
+                alert("Funcionalidade de compra direta ainda não implementada.");
+              }}
+            >
+              Comprar
+            </button>
             <button
               onClick={handleAddToCart}
               className="w-full bg-blue-700 text-white py-4 rounded-md font-bold hover:bg-blue-800 transition"
