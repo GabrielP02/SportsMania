@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import './navbar.css';
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cartContext_temp";
 import logo from "../assets/logo.jpeg";
 import { APP_ROUTES } from "../utils/constants";
 
+// Mapeamento de categoria para rota
 const categoriaRotas = {
     academia: "/academia",
     futebol: "/futebol",
@@ -24,32 +25,38 @@ const Navbar = () => {
     const [search, setSearch] = useState("");
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
     const { totalItems } = useCart();
 
-    // Função para identificar categoria pela busca
-    function getCategoriaRoute(busca) {
-        if (!busca) return null;
-        const buscaLower = busca.trim().toLowerCase();
-        // Busca por nome exato da categoria
-        for (const cat in categoriaRotas) {
-            if (buscaLower === cat) return categoriaRotas[cat];
-        }
-        // Busca por nome parcial
-        for (const cat in categoriaRotas) {
-            if (cat.includes(buscaLower) || buscaLower.includes(cat)) return categoriaRotas[cat];
-        }
-        // Se não encontrar, vai para "todos"
-        return categoriaRotas["todos"];
-    }
-
-    // Ao pressionar Enter ou clicar no botão de busca
-    function handleSearch(e) {
+    // Busca produto na API e redireciona para a categoria correta mostrando só o produto pesquisado
+    async function handleSearch(e) {
         e.preventDefault();
-        if (!search.trim()) return;
-        const rota = getCategoriaRoute(search);
-        // Passa a busca como query param para a página de categoria
-        navigate(`${rota}?busca=${encodeURIComponent(search.trim())}`);
+        const termo = search.trim();
+        if (!termo) return;
+
+        try {
+            // Busca todos os produtos
+            const res = await fetch("https://sportsmaniaback.onrender.com/api/produtos/find/all");
+            const produtos = await res.json();
+
+            // Procura produto pelo nome (case insensitive, inclui)
+            const produtoEncontrado = produtos.find(prod =>
+                prod.nome && prod.nome.toLowerCase().includes(termo.toLowerCase())
+            );
+
+            if (produtoEncontrado) {
+                // Descobre a categoria do produto
+                const categoria = (produtoEncontrado.categoria || "todos").toLowerCase();
+                const rota = categoriaRotas[categoria] || categoriaRotas["todos"];
+                // Redireciona para a rota da categoria com query param para filtrar pelo nome exato
+                navigate(`${rota}?busca=${encodeURIComponent(produtoEncontrado.nome)}`);
+            } else {
+                // Se não encontrou, vai para "todos" com a busca
+                navigate(`/todos?busca=${encodeURIComponent(termo)}`);
+            }
+        } catch (err) {
+            // Em caso de erro, vai para "todos" com a busca
+            navigate(`/todos?busca=${encodeURIComponent(termo)}`);
+        }
         setSearch("");
     }
 
