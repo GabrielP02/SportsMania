@@ -192,7 +192,7 @@ const Navbar = () => {
                                 onClick={() => { navigate("/addressUpdate"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
-                                Endereços
+                                Alterar Endereço
                             </div>
                             
                         </div>
