@@ -26,6 +26,7 @@ import Natacao from "./pages/CategoriasPage/Natacao";
 import Todos from "./pages/CategoriasPage/Todos";
 import Variados from "./pages/CategoriasPage/Variados";
 import Voleibol from "./pages/CategoriasPage/Voleibol";
+import MyData from "./pages/MyData";
 
 const AppRoutes = () => {
   return (
@@ -56,6 +57,7 @@ const AppRoutes = () => {
       <Route path={APP_ROUTES.TODOS} element={<Todos />} />
       <Route path={APP_ROUTES.VARIADOS} element={<Variados />} />
       <Route path={APP_ROUTES.VOLEIBOL} element={<Voleibol />} />
+      <Route path="/dados" element={<MyData />} />
     </Routes>
   );
 };

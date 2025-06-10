@@ -132,7 +132,10 @@ const Navbar = () => {
             </form>
 
             {/* Ícones e menus à direita */}
-            <div className="right-section" style={{ display: "flex", alignItems: "center", gap: "32px", position: "relative" }}>
+            <div
+                className="right-section"
+                style={{ display: "flex", alignItems: "center", gap: "32px", position: "relative" }}
+            >
                 {/* Loja Física */}
                 <div
                     style={{ display: "flex", alignItems: "center", color: "#fff", cursor: "pointer", fontWeight: 600 }}
@@ -175,7 +178,7 @@ const Navbar = () => {
                             </div>
                              <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
-                                onClick={() => { navigate(APP_ROUTES.SIGN_IN); setUserMenuOpen(false); }}
+                                onClick={() => { navigate("/dados"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
                                 Minha conta
