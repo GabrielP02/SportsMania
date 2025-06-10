@@ -22,7 +22,7 @@ const SignUp = () => {
           username: nome,
           password,
           email,
-          personType: "USER"
+          personType: "ADMIN" // ou "USER", conforme sua regra
         }),
       });
 
@@ -53,6 +53,7 @@ const SignUp = () => {
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: "blur(6px)",
+      
           zIndex: 0,
         }}
       />
@@ -68,7 +69,7 @@ const SignUp = () => {
           <form onSubmit={handleRegister} className="flex flex-col gap-6">
             <input
               type="text"
-              placeholder="Nome completo"
+              placeholder="Nome Completo"
               className="rounded-full px-6 py-3 border border-gray-300 focus:outline-none focus:ring-2 text-lg"
               style={{ focus: { borderColor: "#b81414" } }}
               value={nome}

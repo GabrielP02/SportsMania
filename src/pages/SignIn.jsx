@@ -4,7 +4,7 @@ import { APP_ROUTES } from "../utils/constants";
 import jogador1 from "../assets/jogador1.png";
 
 const SignIn = () => {
-  const [email, setEmail] = useState(""); // Alterado para email
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email, // Envia o email
+          username,
           password,
         }),
       });
@@ -51,6 +51,7 @@ const SignIn = () => {
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: "blur(6px)",
+        
           zIndex: 0,
         }}
       />
@@ -62,11 +63,11 @@ const SignIn = () => {
           </h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <input
-              type="email"
-              placeholder="E-mail"
+              type="text"
+              placeholder="Nome de usuário"
               className="rounded-full px-6 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
             <input
