@@ -83,14 +83,7 @@ const Navbar = () => {
 
             {/* Ícones e menus à direita */}
             <div className="right-section" style={{ display: "flex", alignItems: "center", gap: "32px", position: "relative" }}>
-                {/* Lista de Desejos */}
-                <div
-                    style={{ display: "flex", alignItems: "center", color: "#fff", cursor: "pointer", gap: "8px", fontWeight: 600 }}
-                    onClick={() => navigate("/wishlist")}
-                >
-                    <FaRegHeart size={22} />
-                    <span>Lista de Desejos</span>
-                </div>
+              
 
                 {/* Loja Física */}
                 <div
