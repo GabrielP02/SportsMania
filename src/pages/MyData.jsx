@@ -29,12 +29,7 @@ const MyData = () => {
 
   // Sidebar navigation
   const navOptions = [
-    {
-      label: "Pedidos",
-      icon: <FaBoxOpen className="mr-2" />,
-      onClick: () => navigate("/MyOrders"),
-      active: false,
-    },
+   
     {
       label: "Seus dados",
       icon: <FaUser className="mr-2" />,
