@@ -104,7 +104,7 @@ const AddressUpdate = () => {
       icon: <FaSignOutAlt className="mr-2" />,
       onClick: () => {
         localStorage.clear();
-        navigate("/login");
+        navigate("/signin");
       },
       active: false,
     },
