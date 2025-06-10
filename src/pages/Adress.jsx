@@ -83,7 +83,7 @@ const Adress = () => {
             <div className="hidden md:flex bg-gray-100 rounded-lg p-4 items-center gap-2 w-fit mb-6">
               <span className="text-xl text-gray-600">📍</span>
               <span className="text-gray-700">
-                Rua Aurora, nº 369 – Jardim Perola, Birigui – SP
+              Rua Pedro Allain, 81 - Loja:5 - Casa Amarela, Recife - PE, 52070-210
               </span>
             </div>
             {/* Horário de Funcionamento */}
