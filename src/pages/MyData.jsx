@@ -32,7 +32,7 @@ const MyData = () => {
     {
       label: "Pedidos",
       icon: <FaBoxOpen className="mr-2" />,
-      onClick: () => navigate("/pedidos"),
+      onClick: () => navigate("/MyOrders"),
       active: false,
     },
     {

@@ -202,7 +202,7 @@ const Navbar = () => {
                             </div>
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
-                                onClick={() => { navigate("/orders"); setUserMenuOpen(false); }}
+                                onClick={() => { navigate("/MyOrders"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
                                 Meus Pedidos
