@@ -86,12 +86,7 @@ const AddressUpdate = () => {
 
   // Sidebar navigation
   const navOptions = [
-    {
-      label: "Pedidos",
-      icon: <FaBoxOpen className="mr-2" />,
-      onClick: () => navigate("/orders"),
-      active: false,
-    },
+  
     {
       label: "Seus dados",
       icon: <FaUser className="mr-2" />,
