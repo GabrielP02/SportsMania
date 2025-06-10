@@ -1,24 +1,62 @@
 import React, { useState } from "react";
 import './navbar.css';
-import { FaShoppingCart, FaRegHeart, FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../context/cartContext_temp";
 import logo from "../assets/logo.jpeg";
 import { APP_ROUTES } from "../utils/constants";
+
+const categoriaRotas = {
+    academia: "/academia",
+    futebol: "/futebol",
+    natacao: "/natacao",
+    luta: "/luta",
+    ciclismo: "/ciclismo",
+    voleibol: "/voleibol",
+    basquete: "/basquete",
+    variados: "/variados",
+    todos: "/todos"
+};
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
     const [search, setSearch] = useState("");
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     const { totalItems } = useCart();
+
+    // Função para identificar categoria pela busca
+    function getCategoriaRoute(busca) {
+        if (!busca) return null;
+        const buscaLower = busca.trim().toLowerCase();
+        // Busca por nome exato da categoria
+        for (const cat in categoriaRotas) {
+            if (buscaLower === cat) return categoriaRotas[cat];
+        }
+        // Busca por nome parcial
+        for (const cat in categoriaRotas) {
+            if (cat.includes(buscaLower) || buscaLower.includes(cat)) return categoriaRotas[cat];
+        }
+        // Se não encontrar, vai para "todos"
+        return categoriaRotas["todos"];
+    }
+
+    // Ao pressionar Enter ou clicar no botão de busca
+    function handleSearch(e) {
+        e.preventDefault();
+        if (!search.trim()) return;
+        const rota = getCategoriaRoute(search);
+        // Passa a busca como query param para a página de categoria
+        navigate(`${rota}?busca=${encodeURIComponent(search.trim())}`);
+        setSearch("");
+    }
 
     return (
         <nav className="navbar" style={{ backgroundColor: "#185cfc", display: "flex", alignItems: "center", padding: "0 32px" }}>
-            {/* Logo e Sidebar */}
+            {/* Logo */}
             <div className="left-section" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                
                 <img
                     src={logo}
                     alt="Logo Sports Mania"
@@ -32,13 +70,16 @@ const Navbar = () => {
             </div>
 
             {/* Barra de pesquisa centralizada */}
-            <div style={{
-                flex: 1,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "0 32px"
-            }}>
+            <form
+                onSubmit={handleSearch}
+                style={{
+                    flex: 1,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "0 32px"
+                }}
+            >
                 <div style={{
                     display: "flex",
                     alignItems: "center",
@@ -64,6 +105,7 @@ const Navbar = () => {
                         }}
                     />
                     <button
+                        type="submit"
                         style={{
                             background: "none",
                             border: "none",
@@ -79,12 +121,10 @@ const Navbar = () => {
                         <FiSearch size={22} color="#185cfc" />
                     </button>
                 </div>
-            </div>
+            </form>
 
             {/* Ícones e menus à direita */}
             <div className="right-section" style={{ display: "flex", alignItems: "center", gap: "32px", position: "relative" }}>
-              
-
                 {/* Loja Física */}
                 <div
                     style={{ display: "flex", alignItems: "center", color: "#fff", cursor: "pointer", fontWeight: 600 }}
