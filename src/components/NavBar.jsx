@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './navbar.css';
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../context/cartContext_temp";
 import logo from "../assets/logo.jpeg";
 import { APP_ROUTES } from "../utils/constants";
@@ -25,6 +25,7 @@ const Navbar = () => {
     const [search, setSearch] = useState("");
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     const { totalItems } = useCart();
 
     // Busca produto na API e redireciona para a categoria correta mostrando só o produto pesquisado
@@ -220,3 +221,22 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// Exemplo para qualquer página de categoria
+const Categoria = () => {
+  // ...outros hooks...
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const buscaParam = params.get("busca") || "";
+
+  // ...fetch dos produtos...
+
+  // Se buscaParam existir, filtra por nome exato (case insensitive), senão mostra todos da categoria
+  const produtosFiltrados = products.filter((produto) =>
+    buscaParam
+      ? produto.nome.toLowerCase() === buscaParam.toLowerCase()
+      : produto.nome.toLowerCase().includes(busca.toLowerCase())
+  );
+
+  // ...restante do componente...
+};
