@@ -158,14 +158,7 @@ const ProductPage = () => {
 
           {/* Botão de comprar e adicionar ao carrinho */}
           <div className="flex flex-col gap-4 mt-4">
-            <button
-              className="w-full bg-blue-600 text-white py-4 rounded-md font-bold hover:bg-blue-700 transition"
-              onClick={() => {
-                alert("Funcionalidade de compra direta ainda não implementada.");
-              }}
-            >
-              Comprar
-            </button>
+            
             <button
               onClick={handleAddToCart}
               className="w-full bg-blue-700 text-white py-4 rounded-md font-bold hover:bg-blue-800 transition"
