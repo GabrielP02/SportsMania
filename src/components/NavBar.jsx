@@ -200,13 +200,19 @@ const Navbar = () => {
                             >
                                 Minha conta
                             </div>
-                        
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
                                 onClick={() => { navigate("/addressUpdate"); setUserMenuOpen(false); }}
                                 onMouseDown={e => e.preventDefault()}
                             >
                                 Alterar Endereço
+                            </div>
+                            <div
+                                style={{ padding: "10px 18px", cursor: "pointer" }}
+                                onClick={() => { navigate("/MyOrders"); setUserMenuOpen(false); }}
+                                onMouseDown={e => e.preventDefault()}
+                            >
+                                Meus Pedidos
                             </div>
                         </div>
                     )}
