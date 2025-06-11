@@ -142,6 +142,15 @@ const Cart = () => {
       if (response.ok) {
         const data = await response.json();
         const url = data.init_point;
+        const pedidoId = data.pedidoId; // <-- Aqui você pega o id do pedido retornado pelo backend
+
+        // Exemplo 1: Salvar no localStorage para usar depois
+        localStorage.setItem("pedidoId", pedidoId);
+
+        // Exemplo 2: Redirecionar para a tela de status do pedido
+        // navigate(`/status-pedido/${pedidoId}`);
+
+        // Continua fluxo do Mercado Pago normalmente
         if (url && url.startsWith("http")) {
           window.location.href = url;
         } else {
