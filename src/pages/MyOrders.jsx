@@ -47,8 +47,18 @@ function StatusPagamento({ pedidoId }) {
 }
 
 const MyOrders = () => {
-  // Exemplo: substitua pelo id real do pedido do usuário
-  const pedidoId = 1;
+  const [pedidoId, setPedidoId] = useState(null);
+
+  useEffect(() => {
+    const clienteId = localStorage.getItem("clienteId");
+    fetch(`https://sportsmaniaback.onrender.com/api/pedidos/person/${clienteId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setPedidoId(data[0].id); // Pega o pedido mais recente
+        }
+      });
+  }, []);
 
   return (
     <>
@@ -58,7 +68,11 @@ const MyOrders = () => {
         <p className="text-lg text-gray-600">
           Aqui você pode ver todos os seus pedidos anteriores.
         </p>
-        <StatusPagamento pedidoId={pedidoId} />
+        {pedidoId ? (
+          <StatusPagamento pedidoId={pedidoId} />
+        ) : (
+          <p>Nenhum pedido encontrado.</p>
+        )}
       </div>
     </>
   );
