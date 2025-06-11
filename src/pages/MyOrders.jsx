@@ -54,6 +54,7 @@ const MyOrders = () => {
     fetch(`https://sportsmaniaback.onrender.com/api/pedidos/person/${clienteId}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log("Pedidos recebidos:", data);
         if (Array.isArray(data) && data.length > 0) {
           setPedidoId(data[0].id); // Pega o pedido mais recente
         }
