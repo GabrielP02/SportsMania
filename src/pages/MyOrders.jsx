@@ -51,7 +51,7 @@ const MyOrders = () => {
 
   useEffect(() => {
     const clienteId = localStorage.getItem("clienteId");
-    fetch(`https://sportsmaniaback.onrender.com/api/pedidos/person/${clienteId}`)
+    fetch(`https://sportsmaniaback.onrender.com/api/pedidos/usuario/${clienteId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Pedidos recebidos:", data);
