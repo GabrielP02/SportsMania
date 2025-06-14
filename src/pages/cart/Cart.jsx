@@ -10,6 +10,7 @@ const Cart = () => {
   const [servicoSelecionado, setServicoSelecionado] = useState(null);
   const [calculandoFrete, setCalculandoFrete] = useState(false);
   const [endereco, setEndereco] = useState(null);
+  const [pagando, setPagando] = useState(false);
 
   const clienteId = localStorage.getItem("clienteId");
   const navigate = useNavigate();
@@ -116,6 +117,8 @@ const Cart = () => {
   }, [total, servicoSelecionado]);
 
   const handlePagamento = async () => {
+    if (pagando) return;
+    setPagando(true);
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
@@ -139,28 +142,47 @@ const Cart = () => {
         }
       );
 
-      if (response.ok) {
-        const data = await response.json();
-        const url = data.init_point;
-        const pedidoId = data.pedidoId; // <-- Aqui você pega o id do pedido retornado pelo backend
+      const data = await response.json();
+      console.log(data); // Veja o que aparece aqui!
 
-        // Exemplo 1: Salvar no localStorage para usar depois
+      if (response.ok) {
+        const url = data.init_point;
+        const pedidoId = data.pedidoId;
         localStorage.setItem("pedidoId", pedidoId);
 
-        // Exemplo 2: Redirecionar para a tela de status do pedido
-        // navigate(`/status-pedido/${pedidoId}`);
+        // Limpa o carrinho no backend usando o ID do carrinho
+        // Supondo que você tem o carrinhoId disponível (exemplo: data.carrinhoId ou outro local)
+        const carrinhoId = data.carrinhoId; // ajuste conforme sua resposta/estado
+        if (carrinhoId) {
+          await fetch(
+            `https://sportsmaniaback.onrender.com/api/carrinho/${carrinhoId}/produtos`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                ...(token && { Authorization: `Bearer ${token}` }),
+              },
+            }
+          );
+        }
 
-        // Continua fluxo do Mercado Pago normalmente
+        // Limpa o carrinho local
+        setCartItems([]);
+        setTotal(0);
+
         if (url && url.startsWith("http")) {
           window.location.href = url;
         } else {
           alert("URL de pagamento não recebida.");
+          setPagando(false);
         }
       } else {
         alert("Erro ao iniciar pagamento.");
+        setPagando(false);
       }
     } catch (error) {
       alert("Erro ao iniciar pagamento.");
+      setPagando(false);
       console.error(error);
     }
   };
@@ -372,11 +394,13 @@ const Cart = () => {
               style={{
                 background: "#185cfc",
                 boxShadow: "0 2px 8px 0 #185cfc40",
+                opacity: pagando ? 0.6 : 1,
+                cursor: pagando ? "not-allowed" : "pointer",
               }}
               onClick={handlePagamento}
-              disabled={cartItems.length === 0}
+              disabled={cartItems.length === 0 || pagando}
             >
-              Finalizar compra
+              {pagando ? "Processando..." : "Finalizar compra"}
             </button>
           </div>
         </div>
