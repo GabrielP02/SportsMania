@@ -23,6 +23,13 @@ const MyOrders = () => {
       });
   }, []);
 
+  // Função para definir a cor de fundo da linha conforme o status
+  const getRowClass = (status) => {
+    if (status === "PAGO") return "bg-green-100";
+    if (status === "AGUARDANDO_PAGAMENTO") return "bg-orange-100";
+    return "";
+  };
+
   return (
     <>
       <NavBar />
@@ -48,7 +55,10 @@ const MyOrders = () => {
               <tbody>
                 {pedidos.map((pedido) =>
                   pedido.itens.map((item) => (
-                    <tr key={item.id} className="border-t">
+                    <tr
+                      key={item.id}
+                      className={`border-t transition-colors ${getRowClass(pedido.status)}`}
+                    >
                       <td className="p-2 flex items-center gap-2">
                         <img
                           src={item.produto.imagem}
@@ -58,7 +68,7 @@ const MyOrders = () => {
                         {item.produto.nome}
                       </td>
                       <td className="p-2">{item.quantidade}</td>
-                      <td className="p-2">
+                      <td className="p-2 font-semibold">
                         {pedido.status === "AGUARDANDO_PAGAMENTO" && "Aguardando pagamento"}
                         {pedido.status === "PAGO" && "Pago"}
                         {pedido.status === "PAGAMENTO_REJEITADO" && "Pagamento rejeitado"}
