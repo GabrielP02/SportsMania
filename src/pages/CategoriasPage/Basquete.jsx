@@ -19,7 +19,7 @@ const ProductCard = ({ id, nome, preco, imagem, descricao }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="border p-4 rounded-lg text-center shadow-md cursor-pointer hover:shadow-lg transition flex flex-col"
+      className=" text-center shadow-md cursor-pointer hover:shadow-lg transition flex flex-col"
       onClick={() => navigate(`/product/${id}`)}
     >
       <img
