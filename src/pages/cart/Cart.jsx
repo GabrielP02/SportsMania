@@ -402,6 +402,14 @@ const Cart = () => {
             >
               {pagando ? "Processando..." : "Finalizar compra"}
             </button>
+            {/* Imagem Pix abaixo do botão de finalizar compra */}
+            <div className="flex justify-center mt-6">
+              <img
+                src="https://admin.ecommercebrasil.com.br/wp-content/uploads/2021/03/Pix-checkout-transparente-do-mercado-pago.png"
+                alt="Pix Checkout Mercado Pago"
+                style={{ maxWidth: 260, width: "100%", height: "auto" }}
+              />
+            </div>
           </div>
         </div>
       </div>
