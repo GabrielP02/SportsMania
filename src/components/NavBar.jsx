@@ -186,13 +186,16 @@ const Navbar = () => {
                                 padding: "8px 0"
                             }}
                         >
-                            <div
-                                style={{ padding: "10px 18px", cursor: "pointer" }}
-                                onClick={() => { navigate(APP_ROUTES.SIGN_IN); setUserMenuOpen(false); }}
-                                onMouseDown={e => e.preventDefault()}
-                            >
-                                Login
-                            </div>
+                            {/* Só mostra "Login" se não estiver logado */}
+                            {!userName && (
+                              <div
+                                  style={{ padding: "10px 18px", cursor: "pointer" }}
+                                  onClick={() => { navigate(APP_ROUTES.SIGN_IN); setUserMenuOpen(false); }}
+                                  onMouseDown={e => e.preventDefault()}
+                              >
+                                  Login
+                              </div>
+                            )}
                             <div
                                 style={{ padding: "10px 18px", cursor: "pointer" }}
                                 onClick={() => { navigate("/dados"); setUserMenuOpen(false); }}
