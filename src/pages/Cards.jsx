@@ -52,17 +52,6 @@ const Cards = () => {
 
         {/* Renderiza AddCard quando mostrarFormulario for true */}
         {mostrarFormulario && <AddCard />}
-
-        {/* Imagem Pix abaixo do botão de finalizar compra */}
-        {mostrarFormulario && (
-          <div className="flex justify-center mt-8">
-            <img
-              src="https://admin.ecommercebrasil.com.br/wp-content/uploads/2021/03/Pix-checkout-transparente-do-mercado-pago.png"
-              alt="Pix Checkout Mercado Pago"
-              style={{ maxWidth: 320, width: "100%", height: "auto" }}
-            />
-          </div>
-        )}
       </div>
     </>
   );
