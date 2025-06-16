@@ -346,7 +346,7 @@ const HomePage = () => {
               Incentivamos a prática esportiva para todas as idades. Com os melhores equipamentos e acessórios, você tem mais disposição e qualidade de vida. Venha se superar com a SportsMania!
             </p>
             <button
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded transition"
+               className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded transition"
               onClick={() => navigate(APP_ROUTES.TODOS)}
             >
               Veja nossas ofertas
@@ -376,7 +376,7 @@ const HomePage = () => {
               Trabalhamos com Nike, Adidas, Puma, Olympikus, Penalty, Speedo e muito mais. 
             </p>
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded transition"
+              className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded transition"
               onClick={() => navigate(APP_ROUTES.TODOS)}
             >
               Compre já
