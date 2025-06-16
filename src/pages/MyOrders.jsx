@@ -100,8 +100,8 @@ const MyOrders = () => {
         )}
       </div>
       {/* Informações de acompanhamento via WhatsApp */}
-      <div className="w-full max-w-2xl mt-8 flex flex-col items-center justify-center">
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center shadow">
+      <div className="flex justify-center w-full mt-8">
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center shadow max-w-xl w-full">
           <p className="mb-2 font-semibold text-green-900">
             Para acompanhar o status da entrega envie uma mensagem no WhatsApp:
           </p>
