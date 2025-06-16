@@ -410,6 +410,13 @@ const Cart = () => {
                 style={{ maxWidth: 260, width: "100%", height: "auto" }}
               />
             </div>
+                        <div className="flex justify-center mt-6">
+              <img
+                src="https://i.postimg.cc/FzHWpGWp/cart-es2.png"
+                alt="Pix Checkout Mercado Pago"
+                style={{ maxWidth: 260, width: "100%", height: "auto" }}
+              />
+            </div>
           </div>
         </div>
       </div>
