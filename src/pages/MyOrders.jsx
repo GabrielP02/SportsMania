@@ -4,9 +4,12 @@ import NavBar from "../components/NavBar";
 const MyOrders = () => {
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     const clienteId = localStorage.getItem("clienteId");
+
+    // Buscar pedidos
     fetch(`https://sportsmaniaback.onrender.com/api/pedidos/usuario/${clienteId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -21,6 +24,15 @@ const MyOrders = () => {
         setPedidos([]);
         setLoading(false);
       });
+
+    // Buscar e-mail do usuário
+    fetch(`https://sportsmaniaback.onrender.com/api/persons/${clienteId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.email) {
+          setUserEmail(data.email);
+        }
+      });
   }, []);
 
   // Função para definir a cor de fundo da linha conforme o status
@@ -29,6 +41,9 @@ const MyOrders = () => {
     if (status === "AGUARDANDO_PAGAMENTO") return "bg-orange-100";
     return "";
   };
+
+  const mensagem = `Olá, gostaria de acompanhar o status da entrega. Meu e-mail: ${userEmail}`;
+  const linkWhatsapp = `https://wa.me/5581994817430?text=${encodeURIComponent(mensagem)}`;
 
   return (
     <>
@@ -83,6 +98,22 @@ const MyOrders = () => {
             </table>
           </div>
         )}
+      </div>
+      {/* Informações de acompanhamento via WhatsApp */}
+      <div className="w-full max-w-2xl mt-8 flex flex-col items-center justify-center">
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center shadow">
+          <p className="mb-2 font-semibold text-green-900">
+            Para acompanhar o status da entrega envie uma mensagem no WhatsApp:
+          </p>
+          <a
+            href={linkWhatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition"
+          >
+            Abrir WhatsApp
+          </a>
+        </div>
       </div>
     </>
   );
