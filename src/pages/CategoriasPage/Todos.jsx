@@ -45,7 +45,10 @@ const Todos = () => {
       .then((data) => setProducts(data));
   }, []);
 
-  const produtosFiltrados = products.filter((produto) =>
+  const produtosOrdenados = [...products].sort((a, b) =>
+    a.nome.localeCompare(b.nome, "pt-BR", { sensitivity: "base" })
+  );
+  const produtosFiltrados = produtosOrdenados.filter((produto) =>
     produto.nome.toLowerCase().includes(busca.toLowerCase())
   );
 
