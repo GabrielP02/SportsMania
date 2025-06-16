@@ -379,7 +379,7 @@ const HomePage = () => {
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded transition"
               onClick={() => navigate(APP_ROUTES.TODOS)}
             >
-              Confira as marcas
+              Compre já
             </button>
           </div>
           {/* Imagem institucional */}
@@ -405,12 +405,7 @@ const HomePage = () => {
             <p className="text-lg text-gray-700 mb-6">
               Compre tênis, roupas e acessórios para os pequenos praticarem esportes com conforto e segurança. Temos opções para todas as idades e modalidades.
             </p>
-            <button
-              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded transition"
-              onClick={() => navigate(APP_ROUTES.TODOS)}
-            >
-              Fale com a gente
-            </button>
+         
           </div>
           {/* Imagem institucional */}
           <div className="flex-1 flex justify-center">
