@@ -28,7 +28,7 @@ const ProductCard = ({ id, nome, preco, imagem, descricao }) => {
         className="w-24 h-24 object-contain mx-auto mb-2"
       />
       <h3 className="font-medium mb-1">{nome}</h3>
-      <p className="text-gray-600 text-sm mb-2 line-clamp-3">{descricao}</p>
+   
       <p className="text-lg font-bold mt-auto">R$ {preco.toFixed(2)}</p>
     </div>
   );
